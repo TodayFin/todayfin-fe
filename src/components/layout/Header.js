@@ -9,7 +9,7 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <header className="bg-white text-black">
+    <header className="bg-white text-black shadow-sm border-b border-gray-200">
       <div className="container mx-auto p-4 flex justify-between items-center">
         <div className="flex items-center">
           <img src="/logo.png" alt="Logo" className="h-10 mr-2" />
