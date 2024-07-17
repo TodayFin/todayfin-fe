@@ -19,7 +19,7 @@ const RecommendedNews = () => {
   ];
   return (
     <div className="p-4 bg-white shadow-md rounded-lg">
-      <h2 className="text-xl font-bold mb-4">🌠 추천 뉴스</h2>
+      <h2 className="text-xl font-bold">🌠 추천 뉴스</h2>
       <ul>
         {newsArticles.map((article, index) => (
           <li
