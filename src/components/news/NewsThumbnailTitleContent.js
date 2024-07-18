@@ -8,7 +8,7 @@ const NewsThumbnailTitleContent = ({ imageSrc, title, content }) => {
       />
       <div className="flex-1">
         <h2 className="text-lg font-bold mb-2">{title}</h2>
-        <p className="text-gray-700">{content}</p>
+        <p className="text-gray-700 line-clamp-3">{content}</p>
       </div>
     </div>
   );

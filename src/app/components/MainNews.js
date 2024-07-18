@@ -12,12 +12,12 @@ const MainNews = () => {
         <NewsThumbnailTitleContent
           imageSrc="logo.png"
           title="[IPO스타워즈] '최대어' 시프트업, 코스피 입성… '고평가' 논란 이겨낼까"
-          content="하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은"
+          content="하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구"
         />
         <NewsThumbnailTitleContent
           imageSrc="logo.png"
           title="폼플리아노 '여름 끝나면 BTC 급등 예측… 지금은 여행 시즌'"
-          content="Coiness - 암호화폐 전문 투자자 폼프 인베스트먼트(Pomp Investments) 설립자 앤서니 폼플리아노(Anthony Pompliano)가 CNBC와의 인터뷰에서 여름이"
+          content="Coiness - 암호화폐 전문 투자자 폼프 인베스트먼트(Pomp Investments) 설립자 앤서니 폼플리아노(Anthony Pompliano)가 CNBC와의 인터뷰에서 여름이 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구"
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <NewsThumbnailTitle
