@@ -1,5 +1,5 @@
 const ExchangeRate = () => {
-  const date = "2024-07-18";
+  const date = "UTC 2024-07-18";
   const exchangeRates = [
     { currency: "🇺🇸 USD", rate: "1,200" },
     { currency: "💶 EUR", rate: "1,350" },

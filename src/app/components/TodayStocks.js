@@ -1,5 +1,5 @@
 const TodayStocks = () => {
-  const date = "2024-07-09"; // 표시할 날짜
+  const date = "UTC 2024-07-09";
   const risingStocks = [
     { rank: 1, name: "코아스", change: "+29.97%" },
     { rank: 2, name: "대상홀딩스우", change: "+29.96%" },
