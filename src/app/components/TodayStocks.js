@@ -1,20 +1,28 @@
-const TodayStocks = () => {
-  const date = "UTC 2024-07-09";
-  const risingStocks = [
-    { rank: 1, name: "코아스", change: "+29.97%" },
-    { rank: 2, name: "대상홀딩스우", change: "+29.96%" },
-    { rank: 3, name: "태양금속우", change: "+29.92%" },
-    { rank: 4, name: "태양금속", change: "+29.92%" },
-    { rank: 5, name: "디티앤씨알오오오오오오오오", change: "+29.90%" },
-  ];
+import { useEffect, useState } from "react";
 
-  const fallingStocks = [
-    { rank: 1, name: "한주라이트메탈", change: "-23.10%" },
-    { rank: 2, name: "HB솔루션", change: "-22.20%" },
-    { rank: 3, name: "웨스트라이즈", change: "-14.33%" },
-    { rank: 4, name: "HB테크놀러지", change: "-12.64%" },
-    { rank: 5, name: "투비소프트트트트트트트트트트", change: "-11.45%" },
-  ];
+const TodayStocks = () => {
+  const [risingStocks, setRisingStocks] = useState([]);
+  const [fallingStocks, setFallingStocks] = useState([]);
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch("/api/stocks/top-movers");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setRisingStocks(data.rising);
+        setFallingStocks(data.falling);
+        setDate(new Date(data.last_updated).toLocaleDateString());
+      } catch (error) {
+        console.error("Error fetching stock data:", error);
+      }
+    };
+
+    getData();
+  }, []);
 
   return (
     <div className="p-4 bg-white shadow-md rounded-lg">
