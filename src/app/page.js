@@ -3,7 +3,7 @@
 import MainNews from "./components/MainNews";
 import RecommendedNews from "./components/RecommendedNews";
 import TodayStocks from "./components/TodayStocks";
-import USGDP from "./components/USGDP";
+import USGDP from "./components/USRealGDP";
 import ExchangeRate from "./components/ExchangeRate";
 
 const Home = () => {
