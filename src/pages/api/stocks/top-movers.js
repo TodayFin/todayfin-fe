@@ -16,6 +16,8 @@ const fetchTopMovers = async (req, res) => {
       .map((stock, index) => ({
         rank: index + 1,
         name: stock.ticker,
+        price: stock.price,
+        amount: stock.change_amount,
         change: `${roundToThirdDecimal(
           parseFloat(stock.change_percentage.replace("%", ""))
         )}%`,
@@ -26,6 +28,8 @@ const fetchTopMovers = async (req, res) => {
       .map((stock, index) => ({
         rank: index + 1,
         name: stock.ticker,
+        price: stock.price,
+        amount: stock.change_amount,
         change: `${roundToThirdDecimal(
           parseFloat(stock.change_percentage.replace("%", ""))
         )}%`,
