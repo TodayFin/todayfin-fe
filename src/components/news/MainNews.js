@@ -1,5 +1,5 @@
-import NewsThumbnailTitle from "../../components/news/NewsThumbnailTitle";
-import NewsThumbnailTitleContent from "../../components/news/NewsThumbnailTitleContent";
+import NewsThumbnailTitle from "./NewsThumbnailTitle";
+import NewsThumbnailTitleContent from "./NewsThumbnailTitleContent";
 
 const MainNews = () => {
   return (

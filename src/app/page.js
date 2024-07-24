@@ -1,10 +1,10 @@
 "use client";
 
-import MainNews from "./components/MainNews";
-import RecommendedNews from "./components/RecommendedNews";
-import TodayStocks from "./components/TodayStocks";
-import USGDP from "./components/USRealGDP";
-import ExchangeRate from "./components/ExchangeRate";
+import MainNews from "../components/news/MainNews";
+import RecommendedNews from "../components/news/RecommendedNews";
+import TodayStocks from "../components/stocks/TodayStocks";
+import USGDP from "../components/stocks/USRealGDP";
+import ExchangeRate from "../components/ExchangeRate";
 
 const Home = () => {
   return (
