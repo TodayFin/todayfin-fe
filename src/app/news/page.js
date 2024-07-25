@@ -138,7 +138,7 @@ const NewsPage = () => {
   const handleDateSelect = (date) => {};
 
   return (
-    <div className="mx-auto p-4">
+    <div className="container mx-auto p-4">
       <SelectCategory onSelect={handleCategorySelect} />{" "}
       <div className="p-4 bg-white shadow-md rounded-lg">
         <SelectDay className="mt-4" onSelect={handleDateSelect} />

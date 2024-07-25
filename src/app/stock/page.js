@@ -3,7 +3,7 @@ import SearchTop10 from "../../components/stocks/SearchTop10";
 
 const StockPage = () => {
   return (
-    <div className="mx-auto p-4">
+    <div className="container mx-auto p-4">
       <TodayStockMovers />
       <SearchTop10 />
     </div>
