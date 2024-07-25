@@ -76,7 +76,7 @@ const CoinList = ({ data }) => {
           (_, index) => (
             <button
               key={index}
-              className={`mx-1 px-2 py-1 rounded ${
+              className={`w-8 h-8 mx-1 px-2 py-1 rounded ${
                 currentPage === index + 1
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200"
