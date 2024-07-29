@@ -21,12 +21,12 @@ export default function handler(req, res) {
     comments: [
       {
         user: "user1",
-        comment: "아주 좋은 기사네요!",
+        text: "아주 좋은 기사네요!",
         timestamp: "2024-07-09 16:10:00",
       },
       {
         user: "user2",
-        comment: "유익한 정보 감사합니다.",
+        text: "유익한 정보 감사합니다.",
         timestamp: "2024-07-09 16:12:00",
       },
     ],
