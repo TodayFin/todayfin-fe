@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReceivedMessage from "./ReceivedMessage";
 import SentMessage from "./SentMessage";
 
 const ChatRoom = ({ comments }) => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState(comments);
+  const chatEndRef = useRef(null);
 
   const currentUserId = 1;
 
@@ -23,6 +24,16 @@ const ChatRoom = ({ comments }) => {
       setMessage("");
     }
   };
+
+  const scrollToBottom = () => {
+    if (chatEndRef.current) {
+      chatEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chat]);
 
   return (
     <div className="bg-white p-4 shadow-md rounded-lg">
@@ -45,6 +56,7 @@ const ChatRoom = ({ comments }) => {
             />
           )
         )}
+        <div ref={chatEndRef} />
       </div>
       <div className="flex">
         <input
