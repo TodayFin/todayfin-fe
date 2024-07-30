@@ -27,7 +27,7 @@ const ChatRoom = ({ comments }) => {
   return (
     <div className="bg-white p-4 shadow-md rounded-lg">
       <h2 className="text-xl font-bold mb-4">채팅방</h2>
-      <div className="mb-4">
+      <div className="mb-4 max-h-96 overflow-y-auto">
         {chat.map((comment, index) =>
           comment.userId === currentUserId ? (
             <SentMessage
