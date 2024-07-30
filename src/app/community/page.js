@@ -18,8 +18,7 @@ const CommunityPage = () => {
         {
           userName: "Dann",
           userId: "dannpetty",
-          content:
-            "I learned how to build a website in @Framer!",
+          content: "I learned how to build a website in @Framer!",
         },
         {
           userName: "Manoj",
