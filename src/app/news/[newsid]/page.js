@@ -40,10 +40,8 @@ const NewsPage = () => {
           <NewsHeader
             title={newsData.title}
             source={newsData.source}
-            author={newsData.author}
             publishedAt={newsData.publishedAt}
             views={newsData.views}
-            comments={newsData.comments.length}
           />
           <NewsContent
             imageSrc={newsData.urlToImage}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NewsHeader = ({ title, source, author, publishedAt, views, comments }) => {
+const NewsHeader = ({ title, source, publishedAt, views }) => {
   return (
     <div className="mb-4">
       <h1 className="text-3xl font-bold mb-2">{title}</h1>
@@ -8,7 +8,6 @@ const NewsHeader = ({ title, source, author, publishedAt, views, comments }) => 
         <span>{source} | </span>
         <span>{new Date(publishedAt).toLocaleString()} | </span>
         <span>조회 {views} | </span>
-        <span>댓글 {comments}</span>
       </div>
     </div>
   );
