@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import NewsHeader from "@/components/news/NewsHeader";
 import NewsContent from "@/components/news/NewsContent";
 import RecommendedNewsSidebar from "@/components/news/RecommendedNewsSidebar";
-import ChatRoom from "@/components/news/ChatRoom";
+import ChatRoom from "@/components/news/chat/ChatRoom";
 
 const NewsPage = () => {
   const pathname = usePathname();

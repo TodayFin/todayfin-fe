@@ -1,15 +1,20 @@
+"use client";
 import React, { useState } from "react";
+import ReceivedMessage from "./ReceivedMessage";
+import SentMessage from "./SentMessage";
 
 const ChatRoom = ({ comments }) => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState(comments);
+
+  const currentUserId = 1;
 
   const handleSend = () => {
     if (message.trim()) {
       setChat([
         ...chat,
         {
-          userId: 1,
+          userId: currentUserId,
           user: "user1",
           text: message,
           timestamp: new Date().toISOString(),
@@ -23,28 +28,23 @@ const ChatRoom = ({ comments }) => {
     <div className="bg-white p-4 shadow-md rounded-lg">
       <h2 className="text-xl font-bold mb-4">채팅방</h2>
       <div className="mb-4">
-        {chat.map((comment, index) => (
-          <div key={index} className="mb-4 flex items-start">
-            <div className="mr-4">
-              <img
-                src="https://avatars.githubusercontent.com/u/86763857?v=4"
-                alt={comment.user}
-                className="rounded-full w-12 h-12 object-cover"
-              />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center mb-1">
-                <span className="font-bold mr-2">{comment.user}</span>
-                <span className="text-gray-500 text-sm">
-                  {new Date(comment.timestamp).toLocaleString()}
-                </span>
-              </div>
-              <p className="text-gray-700 border p-4 rounded-lg w-fit max-w-[70%]">
-                {comment.text}
-              </p>
-            </div>
-          </div>
-        ))}
+        {chat.map((comment, index) =>
+          comment.userId === currentUserId ? (
+            <SentMessage
+              key={index}
+              user={comment.user}
+              timestamp={comment.timestamp}
+              text={comment.text}
+            />
+          ) : (
+            <ReceivedMessage
+              key={index}
+              user={comment.user}
+              timestamp={comment.timestamp}
+              text={comment.text}
+            />
+          )
+        )}
       </div>
       <div className="flex">
         <input
