@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import CommunityCard from "@/components/community/CommunityCard";
 
 const CommunityPage = () => {
@@ -10,28 +11,33 @@ const CommunityPage = () => {
     const fetchPosts = async () => {
       const newPosts = [
         {
+          id: 1,
           userName: "Daniel",
           userId: "danielwiden",
           content:
             "I've built pretty handy sites powered by Craft or WordPress in the past, but seeing @framer tackle CMS stuff so effortlessly is mind-boggling I've built pretty handy sites powered by Craft or WordPress in the past, but seeing @framer tackle CMS stuff so effortlessly is mind-boggling I've built pretty handy sites powered by Craft or WordPress in the past, but seeing @framer tackle CMS stuff so effortlessly is mind-boggling",
         },
         {
+          id: 2,
           userName: "Dann",
           userId: "dannpetty",
           content: "I learned how to build a website in @Framer!",
         },
         {
+          id: 3,
           userName: "Manoj",
           userId: "manojyjack",
           content: "Websites built on @framer look so beautiful.",
         },
         {
+          id: 4,
           userName: "Fekry",
           userId: "fekryjack",
           content:
             "I have been in an @framer rabbit hole for the past 8 hours without even noticing as time goes by — its everything I love in Figma combined with everything I love",
         },
         {
+          id: 5,
           userName: "Davo",
           userId: "pixelboat",
           content:
@@ -50,12 +56,14 @@ const CommunityPage = () => {
             "The scroll variant in @framer hits differently. Never imaged that making some complex things would be easy with that. Everyday i learn something new",
         },
         {
+          id: 6,
           userName: "Parker",
           userId: "pl_parker",
           content:
             "I was enjoying @framer a lot but I am BLOWN AWAY by their Figma plug-in. From Auto-layout to flex-box in the browser in seconds; this has completely changed how",
         },
         {
+          id: 7,
           userName: "Lauren",
           userId: "write_tacos",
           content:
@@ -90,21 +98,34 @@ const CommunityPage = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4 flex justify-between">
-      {[0, 1, 2].map((col) => (
-        <div key={col} className="flex-1 mx-2">
-          {posts
-            .filter((_, index) => index % 3 === col)
-            .map((post, index) => (
-              <CommunityCard
-                key={index}
-                userName={post.userName}
-                userId={post.userId}
-                content={post.content}
-              />
-            ))}
-        </div>
-      ))}
+    <div className="container mx-auto p-4">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">💁 커뮤니티</h1>
+        <Link
+          href="/community/write"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+        >
+          게시글 작성
+        </Link>
+      </div>
+      <div className="flex justify-between">
+        {[0, 1, 2].map((col) => (
+          <div key={col} className="flex-1 mx-2">
+            {posts
+              .filter((_, index) => index % 3 === col)
+              .map((post, index) => (
+                <Link href={`/community/${post.id}`}>
+                  <CommunityCard
+                    key={index}
+                    userName={post.userName}
+                    userId={post.userId}
+                    content={post.content}
+                  />
+                </Link>
+              ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
