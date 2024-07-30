@@ -31,6 +31,18 @@ export default function handler(req, res) {
         text: "유익한 정보 감사합니다. 유익한 정보 감사합니다. 유익한 정보 감사합니다. 유익한 정보 감사합니다. 유익한 정보 감사합니다.",
         timestamp: "2024-07-09 16:12:00",
       },
+      {
+        userId: 1,
+        user: "user1",
+        text: "아주 좋은 기사네요!",
+        timestamp: "2024-07-09 16:10:00",
+      },
+      {
+        userId: 2,
+        user: "user2",
+        text: "유익한 정보 감사합니다. 유익한 정보 감사합니다. 유익한 정보 감사합니다. 유익한 정보 감사합니다. 유익한 정보 감사합니다.",
+        timestamp: "2024-07-09 16:12:00",
+      },
     ],
     recommended: [
       {
