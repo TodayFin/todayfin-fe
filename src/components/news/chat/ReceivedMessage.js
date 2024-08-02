@@ -1,8 +1,10 @@
+import Image from 'next/image'
+
 const ReceivedMessage = ({ user, timestamp, text }) => {
     return (
       <div className="mb-4 flex items-start">
         <div className="mr-4">
-          <img
+          <Image
             src="https://avatars.githubusercontent.com/u/86763857?v=4"
             alt={user}
             className="rounded-full w-12 h-12 object-cover"

@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Image from 'next/image'
 
 const NewsThumbnailTitleContent = ({ imageSrc, title, content }) => {
   return (
     <Link href="/news/1">
       <div className="flex cursor-pointer">
-        <img
+        <Image
           src={imageSrc}
           alt={title}
           className="w-80 h-48 object-cover rounded-lg"

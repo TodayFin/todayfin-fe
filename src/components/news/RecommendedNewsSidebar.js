@@ -1,4 +1,5 @@
 import React from "react";
+import Image from 'next/image'
 
 const RecommendedNewsSidebar = ({ recommended }) => {
   return (
@@ -6,7 +7,7 @@ const RecommendedNewsSidebar = ({ recommended }) => {
       <h2 className="text-xl font-bold mb-4">추천 뉴스</h2>
       {recommended.map((news, index) => (
         <div key={index} className="mb-4 flex">
-          <img
+          <Image
             src={news.urlToImage}
             alt={news.title}
             className="w-32 h-32 object-cover rounded-lg mr-4"

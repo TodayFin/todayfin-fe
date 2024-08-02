@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import Image from 'next/image'
 
 const ReadContent = ({ title, author, views, date, content }) => {
   const router = useRouter();
@@ -14,7 +15,7 @@ const ReadContent = ({ title, author, views, date, content }) => {
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold mb-4">{title}</h1>
         <div className="flex items-center mb-4">
-          <img
+          <Image
             src="https://avatars.githubusercontent.com/u/86763857?v=4"
             alt={author}
             className="w-12 h-12 rounded-full mr-4"

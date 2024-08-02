@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { SvgIcon } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import Image from 'next/image'
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,7 +13,7 @@ const Header = () => {
     <header className="bg-white text-black shadow-sm border-b border-gray-200">
       <div className="container mx-auto p-4 flex justify-between items-center">
         <div className="flex items-center">
-          <img src="/logo.png" alt="Logo" className="h-10 mr-2" />
+          <Image src="/logo.png" alt="Logo" className="h-10 mr-2" />
           <span className="text-xl font-bold">
             <Link href="/">TodayFin</Link>
           </span>
