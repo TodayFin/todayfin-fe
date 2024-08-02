@@ -113,10 +113,9 @@ const CommunityPage = () => {
           <div key={col} className="flex-1 mx-2">
             {posts
               .filter((_, index) => index % 3 === col)
-              .map((post, index) => (
-                <Link href={`/community/${post.id}`}>
+              .map((post) => (
+                <Link href={`/community/${post.id}`} key={post.id}>
                   <CommunityCard
-                    key={index}
                     userName={post.userName}
                     userId={post.userId}
                     content={post.content}
