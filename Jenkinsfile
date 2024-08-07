@@ -7,6 +7,10 @@ pipeline {
         ECR_CREDENTIALS_ID = 'ecr:ap-northeast-2:ecr_credentials_id'
         ALPHA_VANTAGE_API_KEY = credentials('alpha_vantage_api_key')
     }
+    // dev 브랜치만 트리거
+    when {
+            branch '*/dev'
+        }
 
     stages {
         stage('Checkout') {
