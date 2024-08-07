@@ -9,6 +9,8 @@ WORKDIR /app
 # Install application dependencies using npm
 COPY package.json package-lock.json* ./
 RUN npm ci
+# Ensure sharp is installed. You may need to add specific platform tools if sharp installation fails due to binary compatibility.
+RUN npm install sharp
 
 
 
