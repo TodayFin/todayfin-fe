@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'feat/cd', url: "https://github.com/${REPO}.git"
+                git branch: 'dev', url: "https://github.com/${REPO}.git"
             }
         }
 
