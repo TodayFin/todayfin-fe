@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from 'next/image'
+import Image from "next/image";
 
 const NewsThumbnailTitleContent = ({ imageSrc, title, content }) => {
   return (
@@ -9,6 +9,8 @@ const NewsThumbnailTitleContent = ({ imageSrc, title, content }) => {
           src={imageSrc}
           alt={title}
           className="w-80 h-48 object-cover rounded-lg"
+          width={48}
+          height={48}
         />
         <div className="flex-1">
           <h2 className="text-lg font-bold mb-2">{title}</h2>
