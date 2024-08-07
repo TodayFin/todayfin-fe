@@ -19,6 +19,8 @@ const SentMessage = ({ user, timestamp, text }) => {
           src="https://avatars.githubusercontent.com/u/86763857?v=4"
           alt={user}
           className="rounded-full w-12 h-12 object-cover"
+          width={48}
+          height={48}
         />
       </div>
     </div>
