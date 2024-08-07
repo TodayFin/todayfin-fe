@@ -6,116 +6,116 @@ import NewsThumbnailTitleContent from "@/components/news/NewsThumbnailTitleConte
 
 const sampleNewsData = [
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 1",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 2",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 3",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 4",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 5",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 6",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 7",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 8",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 9",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 10",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   ,
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 2",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 3",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 4",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 5",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 6",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 7",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 8",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 9",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
   },
   {
-    imageSrc: "logo.png",
+    imageSrc: "/logo.png",
     title: "Sample News Title 10",
     content:
       "하반기 IPO(기업공개) 최대어 시프트업이 유가증권시장에 상장한다. 고평가 논란 등 우려를 이겨내고 코스피 시장에 안착할지 관심이 쏠린다. 11일 금융투자업계에 따르면 시프트업은 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구 어쩌구저쩌구",
