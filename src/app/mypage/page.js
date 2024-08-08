@@ -1,0 +1,122 @@
+"use client";
+
+import { useState } from "react";
+
+const MyPage = () => {
+  const [email, setEmail] = useState("user@example.com");
+  const [nickname, setNickname] = useState("사용자 닉네임");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (newPassword !== confirmNewPassword) {
+      alert("새 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    // 비밀번호 수정 API 호출
+    console.log("현재 비밀번호:", currentPassword);
+    console.log("새 비밀번호:", newPassword);
+
+    alert("비밀번호가 성공적으로 변경되었습니다.");
+  };
+
+  return (
+    <div className="flex justify-center min-h-screen bg-gray-100 pt-16 pb-16">
+      <div className="w-full h-full max-w-lg bg-white p-8 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-6 text-center">마이페이지</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 font-semibold mb-2"
+            >
+              이메일
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none"
+              value={email}
+              disabled
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="nickname"
+              className="block text-gray-700 font-semibold mb-2"
+            >
+              닉네임
+            </label>
+            <input
+              type="text"
+              id="nickname"
+              className="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none"
+              value={nickname}
+              disabled
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="currentPassword"
+              className="block text-gray-700 font-semibold mb-2"
+            >
+              현재 비밀번호
+            </label>
+            <input
+              type="password"
+              id="currentPassword"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="newPassword"
+              className="block text-gray-700 font-semibold mb-2"
+            >
+              새 비밀번호
+            </label>
+            <input
+              type="password"
+              id="newPassword"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="confirmNewPassword"
+              className="block text-gray-700 font-semibold mb-2"
+            >
+              새 비밀번호 확인
+            </label>
+            <input
+              type="password"
+              id="confirmNewPassword"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={confirmNewPassword}
+              onChange={(e) => setConfirmNewPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+          >
+            비밀번호 수정
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default MyPage;

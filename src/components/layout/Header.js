@@ -9,6 +9,14 @@ import Image from "next/image";
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
     <header className="bg-white text-black shadow-sm border-b border-gray-200">
       <div className="container mx-auto p-4 flex justify-between items-center">
@@ -102,17 +110,28 @@ const Header = () => {
           </ul>
           <div>
             {isLoggedIn ? (
-              <button
-                onClick={() => setIsLoggedIn(false)}
-                className="px-4 py-2 text-gray-400 text-sm"
-              >
-                로그아웃
-              </button>
+              <>
+                <Link
+                  href="/mypage"
+                  className="px-2 py-2 text-gray-400 text-sm"
+                >
+                  마이페이지
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="px-2 py-2 text-gray-400 text-sm"
+                >
+                  로그아웃
+                </button>
+              </>
             ) : (
               <>
-                <Link href="/login" className="px-2 py-2 text-gray-400 text-sm">
+                <button
+                  onClick={handleLogin}
+                  className="px-2 py-2 text-gray-400 text-sm"
+                >
                   로그인
-                </Link>
+                </button>
                 <Link
                   href="/signup"
                   className="px-2 py-2 text-gray-400 text-sm"
