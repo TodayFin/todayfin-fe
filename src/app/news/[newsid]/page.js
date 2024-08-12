@@ -42,6 +42,7 @@ const NewsPage = () => {
             source={newsData.source}
             publishedAt={newsData.publishedAt}
             views={newsData.views}
+            content={newsData.description}
           />
           <NewsContent
             imageSrc={newsData.urlToImage}
