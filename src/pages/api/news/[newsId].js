@@ -3,39 +3,28 @@ export default function handler(req, res) {
 
   const mockData = {
     id: newsId,
-    title: "삼성전자, 조직 개편 'HBM 개발팀' 신설...'HBM에 더 집중'",
+    title: "Gov't to raise med school admissions quota by 2,000 from 2025",
     category: "비즈니스",
-    article: `삼성전자가 HBM(고대역폭 메모리) 개발팀을 신설했습니다. 
-      삼성전자 디바이스솔루션(DS) 부문은 오늘(4일) HBM 개발팀 신설을 골자로 하는 조직 개편을 실시했습니다.
-      이번 개편으로 HBM 시장 확대를 목표로 하는 전략을 강화할 계획입니다.`,
+    article: ``,
     urlToImage:
       "https://ts2.mm.bing.net/th?q=new%20%EC%B6%98%EC%8B%9D%EC%9D%B4%20%EB%85%B8%ED%8A%B8%EB%B6%81%20%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4",
 
-    description: `삼성전자가 HBM(고대역폭 메모리) 개발팀을 신설했습니다.
+    description: `The government will raise the annual enrollment 1) quota at medical schools by 2,000 starting in 2025 from the 2) current 3,058, Health Minister Cho Kyu-hong announced, Tuesday.
 
-삼성전자 디바이스솔루션(DS) 부문은 오늘(4일) HBM 개발팀 신설을 골자로 하는 조직 개편을 실시했습니다.
 
-메모리사업부 내에 있었던 HBM 전담 조직을 팀으로 신설한 것으로, 신임 팀장은 고성능 D램 제품 설계 전문가인 손영수 부사장이 맡기로 했습니다.
+The ultimate goal is to ensure improved public access to medical services, particularly in rural areas, and to 3) alleviate 4) chronic 5) shortages of physicians in critical fields such as pediatrics and emergency care.
 
-이 같은 HBM 개발팀 신설은 인공지능 시장 확대로 HBM 수요가 급증하면서, HBM 개발에 집중해 기술 경쟁력을 확보하기 위한 것으로 풀이됩니다.
 
-신설된 개발팀은 HBM3와 HBM3E뿐 아니라 차세대 HBM4 기술 개발에도 나설 것으로 보입니다.
+Despite strong opposition from doctors, the Ministry of Health and Welfare made the decision during a health care policy meeting presided over by Cho. The meeting was attended by government officials, healthcare experts, as well as 6) representatives of patients and consumers.
 
-한편 어드밴스드 패키징(AVP) 개발팀과 설비기술연구소도 재편하기로 했습니다.
 
-기존의 AVP 사업팀을 재편한 AVP 개발팀은 전영현 부문장 직속으로 배치됐고, 설비기술연구소도 반도체 공정과 설비 기술 지원 역량을 강화하기 위해 조직을 개편했습니다.
+In response to the government's decision, the Korea Medical Association (KMA), a doctors' organization, issued a warning of a general strike following the conclusion of the Lunar New Year holiday on Feb. 12.
 
-앞서 삼성전자는 지난 5월 반도체 부문 수장을 전 부회장으로 전격 교체하는 등 분위기 쇄신에 나섰습니다.
 
-전 부회장은 당시 취임사에서 “반도체 사업이 과거와 비교해 매우 어려운 상황이라는 것을 절감하고 있다”며 “새로운 각오로 상황을 더욱 냉철하게 분석해 어려움을 극복할 방안을 반드시 찾겠다”고 강조했습니다.
+“Today’s decision will serve as a momentum for the country’s medical reforms,” the health minister said during the meeting. “Now is the golden time to revive essential treatment fields and prepare for an aging society.”
 
-[사진 출처 : 연합뉴스 / 삼성전자 제공]
 
-■ 제보하기
-▷ 카카오톡 : 'KBS제보' 검색, 채널 추가
-▷ 전화 : 02-781-1234, 4444
-▷ 이메일 : kbs1234@kbs.co.kr
-▷ 유튜브, 네이버, 카카오에서도 KBS뉴스를 구독해주세요!`,
+The total admissions quota of the 40 medical schools in Korea has remained unchanged at 3,058 since 2006.`,
     source: "머니투데이",
     author: "홍길동",
     publishedAt: "2024-07-29T14:30:34Z",
