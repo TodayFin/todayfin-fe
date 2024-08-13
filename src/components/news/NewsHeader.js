@@ -26,7 +26,17 @@ const NewsHeader = ({ title, source, publishedAt, views, content }) => {
         }
 
         const data = await response.json();
-        setSummary(data.summary);
+
+        const translateResponse = await fetch("/api/translate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: data.summary, targetLang: "ko" }),
+        });
+
+        const translateData = await translateResponse.json();
+        setSummary(translateData.translatedText);
       } catch (error) {
         setSummary("요약을 불러오지 못했습니다. 다시 시도해주세요." + error);
       } finally {
