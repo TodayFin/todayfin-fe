@@ -5,7 +5,7 @@ const CoinList = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const [sortedData, setSortedData] = useState(data);
-  const [sortKey, setSortKey] = useState("price");
+  const [sortKey, setSortKey] = useState("rate");
 
   useEffect(() => {
     const sorted = [...data].sort((a, b) => {
@@ -40,10 +40,9 @@ const CoinList = ({ data }) => {
             정렬:
           </label>
           <select id="sort" value={sortKey} onChange={handleSortChange}>
-            <option value="price">시가</option>
-            <option value="high">당일 최고가</option>
-            <option value="low">당일 최저가</option>
-            <option value="volume">거래량</option>
+            <option value="rate">시가</option>
+            <option value="bid">매수 호가</option>
+            <option value="ask">매도 호가</option>
           </select>
         </div>
       </div>
@@ -53,9 +52,8 @@ const CoinList = ({ data }) => {
             <th className="py-2">번호</th>
             <th className="py-2 text-left">종목</th>
             <th className="py-2 text-right">시가</th>
-            <th className="py-2 text-right">당일 최고가</th>
-            <th className="py-2 text-right">당일 최저가</th>
-            <th className="py-2 text-right">거래량</th>
+            <th className="py-2 text-right">매수 호가</th>
+            <th className="py-2 text-right">매도 호가</th>
           </tr>
         </thead>
         <tbody>
@@ -63,10 +61,9 @@ const CoinList = ({ data }) => {
             <tr key={index} className="text-center border-b border-gray-200">
               <td className="py-2">{index + 1}</td>
               <td className="py-2 text-left">{item.name}</td>
-              <td className="py-2 text-right">{item.price}</td>
-              <td className="py-2 text-right text-red-500">{item.high}</td>
-              <td className="py-2 text-right text-blue-500">{item.low}</td>
-              <td className="py-2 text-right">{item.volume}</td>
+              <td className="py-2 text-right">{item.rate}</td>
+              <td className="py-2 text-right text-red-500">{item.bid}</td>
+              <td className="py-2 text-right text-blue-500">{item.ask}</td>
             </tr>
           ))}
         </tbody>
