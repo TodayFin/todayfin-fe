@@ -47,8 +47,12 @@ pipeline {
                         // 도커 컨테이너 실행
                         sh "docker run -d -e ALPHA_VANTAGE_API_KEY=${ALPHA_VANTAGE_API_KEY} -e HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY} --name todayfin-fe -p 3000:3000 ${ECR_REPO}:latest"
 
-                        //기존 이미지 삭제 (<none> 태그 이미지 일괄 제거)
-                        sh 'docker rmi $(docker images -f "dangling=true" -q)'
+                        // Docker 이미지 리스트를 가져오고, <none> 태그 이미지 정렬 및 필터링
+                        // 최신 5개를 제외한 이미지 ID 추출
+                        def cleanUpCommand = """
+                            docker images --format '{{.ID}} {{.CreatedAt}}' | grep '<none>' | sort -r -k 2 | tail -n +6 | awk '{print $1}' | xargs -r docker rmi
+                        """
+                        sh cleanUpCommand
                     }
                 }
             }
