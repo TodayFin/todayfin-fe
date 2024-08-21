@@ -49,10 +49,7 @@ pipeline {
 
                         // Docker 이미지 리스트를 가져오고, <none> 태그 이미지 정렬 및 필터링
                         // 최신 5개를 제외한 이미지 ID 추출
-                        def cleanUpCommand = """
-                            docker images --format '{{.ID}} {{.CreatedAt}}' | grep '<none>' | sort -r -k 2 | tail -n +6 | awk '{print $1}' | xargs -r docker rmi
-                        """
-                        sh cleanUpCommand
+                        sh "docker images --format '{{.ID}} {{.CreatedAt}}' | grep '<none>' | sort -r -k 2 | tail -n +6 | awk '{print \$1}' | xargs -r docker rmi"
                     }
                 }
             }
