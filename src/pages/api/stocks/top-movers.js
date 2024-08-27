@@ -1,7 +1,7 @@
 const fetchTopMovers = async (req, res) => {
-  const apiKey = process.env.ALPHA_VANTAGE_API_KEY;
+  const backendUrl = process.env.ALPHA_VANTAGE_BACKEND_URL;
 
-  const apiUrl = `https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=${apiKey}`;
+  const apiUrl = `${backendUrl}/top-gainers-losers`;
 
   try {
     const response = await fetch(apiUrl);
@@ -11,31 +11,23 @@ const fetchTopMovers = async (req, res) => {
       return (Math.round(value * 1000) / 1000).toFixed(3);
     };
 
-    const processedRisingStocks = data.top_gainers
-      .slice(0, 5)
-      .map((stock, index) => ({
-        rank: index + 1,
-        name: stock.ticker,
-        price: stock.price,
-        amount: stock.change_amount,
-        change: `${roundToThirdDecimal(
-          parseFloat(stock.change_percentage.replace("%", ""))
-        )}%`,
-      }));
+    const processedRisingStocks = data.top_gainers.slice(0, 5).map((stock) => ({
+      rank: stock.rank,
+      name: stock.name,
+      price: roundToThirdDecimal(parseFloat(stock.price)),
+      amount: roundToThirdDecimal(parseFloat(stock.amount)),
+      change: stock.change,
+    }));
 
-    const processedFallingStocks = data.top_losers
-      .slice(0, 5)
-      .map((stock, index) => ({
-        rank: index + 1,
-        name: stock.ticker,
-        price: stock.price,
-        amount: stock.change_amount,
-        change: `${roundToThirdDecimal(
-          parseFloat(stock.change_percentage.replace("%", ""))
-        )}%`,
-      }));
+    const processedFallingStocks = data.top_losers.slice(0, 5).map((stock) => ({
+      rank: stock.rank,
+      name: stock.name,
+      price: roundToThirdDecimal(parseFloat(stock.price)),
+      amount: roundToThirdDecimal(parseFloat(stock.amount)),
+      change: stock.change,
+    }));
 
-    const lastUpdatedDate = data.last_updated.split(" ")[0];
+    const lastUpdatedDate = new Date().toISOString().split("T")[0]; // Using current date as last_updated
 
     res.status(200).json({
       last_updated: lastUpdatedDate,
@@ -43,6 +35,7 @@ const fetchTopMovers = async (req, res) => {
       falling: processedFallingStocks,
     });
   } catch (error) {
+    console.error("Error fetching stock data:", error);
     res.status(500).json({ error: "Error fetching stock data" });
   }
 };
