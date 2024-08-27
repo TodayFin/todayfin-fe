@@ -1,7 +1,7 @@
 const fetchUSRealGDPs = async (req, res) => {
-  const apiKey = process.env.ALPHA_VANTAGE_API_KEY;
+  const backendUrl = process.env.ALPHA_VANTAGE_BACKEND_URL;
 
-  const apiUrl = `https://www.alphavantage.co/query?function=REAL_GDP&interval=annual&apikey=${apiKey}`;
+  const apiUrl = `${backendUrl}/real-gdps`;
 
   try {
     const response = await fetch(apiUrl);
@@ -19,6 +19,7 @@ const fetchUSRealGDPs = async (req, res) => {
 
     res.status(200).json(processedData);
   } catch (error) {
+    console.error("Error fetching GDP data:", error);
     res.status(500).json({ error: "Error fetching GDP data" });
   }
 };
