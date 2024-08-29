@@ -5,24 +5,31 @@ const CoinList = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const [sortedData, setSortedData] = useState(data);
-  const [sortKey, setSortKey] = useState("price");
+  const [sortKey, setSortKey] = useState("rate");
+  const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
     const sorted = [...data].sort((a, b) => {
-      return (
-        parseFloat(b[sortKey].replace(/,/g, "")) -
-        parseFloat(a[sortKey].replace(/,/g, ""))
-      );
+      const aValue = parseFloat(a[sortKey]);
+      const bValue = parseFloat(b[sortKey]);
+
+      if (sortOrder === "asc") {
+        return aValue - bValue; // 오름차순
+      } else {
+        return bValue - aValue; // 내림차순
+      }
     });
     setSortedData(sorted);
-  }, [sortKey, data]);
+  }, [sortKey, sortOrder, data]);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
   const handleSortChange = (e) => {
-    setSortKey(e.target.value);
+    const [key, order] = e.target.value.split("-");
+    setSortKey(key);
+    setSortOrder(order);
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -39,11 +46,17 @@ const CoinList = ({ data }) => {
           <label htmlFor="sort" className="mr-2">
             정렬:
           </label>
-          <select id="sort" value={sortKey} onChange={handleSortChange}>
-            <option value="price">시가</option>
-            <option value="high">당일 최고가</option>
-            <option value="low">당일 최저가</option>
-            <option value="volume">거래량</option>
+          <select
+            id="sort"
+            value={`${sortKey}-${sortOrder}`}
+            onChange={handleSortChange}
+          >
+            <option value="rate-desc">시가 내림차순</option>
+            <option value="rate-asc">시가 오름차순</option>
+            <option value="bid-desc">매수 호가 내림차순</option>
+            <option value="bid-asc">매수 호가 오름차순</option>
+            <option value="ask-desc">매도 호가 내림차순</option>
+            <option value="ask-asc">매도 호가 오름차순</option>
           </select>
         </div>
       </div>
@@ -53,9 +66,8 @@ const CoinList = ({ data }) => {
             <th className="py-2">번호</th>
             <th className="py-2 text-left">종목</th>
             <th className="py-2 text-right">시가</th>
-            <th className="py-2 text-right">당일 최고가</th>
-            <th className="py-2 text-right">당일 최저가</th>
-            <th className="py-2 text-right">거래량</th>
+            <th className="py-2 text-right">매수 호가</th>
+            <th className="py-2 text-right">매도 호가</th>
           </tr>
         </thead>
         <tbody>
@@ -63,10 +75,15 @@ const CoinList = ({ data }) => {
             <tr key={index} className="text-center border-b border-gray-200">
               <td className="py-2">{index + 1}</td>
               <td className="py-2 text-left">{item.name}</td>
-              <td className="py-2 text-right">{item.price}</td>
-              <td className="py-2 text-right text-red-500">{item.high}</td>
-              <td className="py-2 text-right text-blue-500">{item.low}</td>
-              <td className="py-2 text-right">{item.volume}</td>
+              <td className="py-2 text-right">
+                {parseFloat(item.rate).toFixed(2)}
+              </td>
+              <td className="py-2 text-right text-red-500">
+                {parseFloat(item.bid).toFixed(2)}
+              </td>
+              <td className="py-2 text-right text-blue-500">
+                {parseFloat(item.ask).toFixed(2)}
+              </td>
             </tr>
           ))}
         </tbody>

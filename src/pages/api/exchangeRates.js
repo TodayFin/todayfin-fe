@@ -1,12 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next";
+const fetchExchangeRates = async (req, res) => {
+  const backendUrl = process.env.ALPHA_VANTAGE_BACKEND_URL;
 
-const fetchExchangeRates = async (
-  req = NextApiRequest,
-  res = NextApiResponse
-) => {
-  const apiKey = process.env.ALPHA_VANTAGE_API_KEY;
-  const currencies = ["USD", "EUR", "JPY", "CNY", "GBP", "AUD"];
-  const toCurrency = "KRW";
+  const apiUrl = `${backendUrl}/exchange-rates`;
+
   const currencyIcons = {
     USD: "🇺🇸",
     EUR: "💶",
@@ -17,42 +13,20 @@ const fetchExchangeRates = async (
   };
 
   try {
-    const promises = currencies.map((currency) =>
-      fetch(
-        `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${currency}&to_currency=${toCurrency}&apikey=${apiKey}`
-      ).then((response) => response.json())
-    );
+    const response = await fetch(apiUrl);
+    const data = await response.json();
 
-    const results = await Promise.all(promises);
-
-    let exchangeRates = null;
-
-    if (results[0]["Information"]) {
-      console.log(results[0]["Information"]);
-      exchangeRates = results.map((result) => {
-        return {
-          icon: currencyIcons["USD"],
-          from_currency: "KRW",
-          rate: -1,
-          last_refreshed: "API-사용한도-초과",
-        };
-      });
-    } else {
-      exchangeRates = results.map((result) => {
-        exchangeRateData = result["Realtime Currency Exchange Rate"];
-        const fromCurrency = exchangeRateData["1. From_Currency Code"];
-        return {
-          icon: currencyIcons[fromCurrency],
-          from_currency: fromCurrency,
-          rate: parseFloat(exchangeRateData["5. Exchange Rate"]).toFixed(2),
-          last_refreshed: exchangeRateData["6. Last Refreshed"],
-        };
-      });
-    }
+    const exchangeRates = data.exchange_rates.map((rateData) => ({
+      icon: currencyIcons[rateData.from_currency],
+      from_currency: rateData.from_currency,
+      rate: parseFloat(rateData.rate).toFixed(2),
+      last_refreshed: rateData.last_refreshed,
+    }));
 
     res.status(200).json(exchangeRates);
   } catch (error) {
-    res.status(500).json({ error: "Error fetching exchange rates" });
+    console.error("Error fetching exchange rates:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
