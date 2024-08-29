@@ -33,6 +33,7 @@ npm install
 ```plaintext
 ALPHA_VANTAGE_API_KEY=demo
 HUGGINGFACE_API_KEY=demo
+ALPHA_VANTAGE_BACKEND_URL=demo
 ```
 
 ## ➡️ 빌드 및 실행
