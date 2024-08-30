@@ -3,26 +3,51 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import useAuthStore from "@/store/authStore";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
+  const login = useAuthStore((state) => state.login);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
-    // 로그인 API 호출
-    console.log("Email:", email);
-    console.log("Password:", password);
+    try {
+      const response = await fetch("/api/user/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          oauthId: email,
+          password,
+        }),
+      });
 
-    router.push("/");
+      if (!response.ok) {
+        throw new Error(
+          "로그인에 실패했습니다. 이메일 또는 비밀번호를 확인하세요."
+        );
+      }
+
+      const data = await response.json();
+      login(data.jwt);
+
+      router.push("/");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
     <div className="flex justify-center min-h-screen bg-gray-100 pt-16 pb-16">
       <div className="w-full h-full max-w-lg bg-white p-8 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center">로그인</h2>
+        {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
@@ -65,7 +90,10 @@ const LoginPage = () => {
         </form>
         <p className="mt-4 text-center">
           비밀번호를 잊으셨나요?{" "}
-          <Link href="/reset-password" className="text-blue-500 hover:underline">
+          <Link
+            href="/reset-password"
+            className="text-blue-500 hover:underline"
+          >
             비밀번호 찾기
           </Link>
         </p>

@@ -5,16 +5,15 @@ import { useState } from "react";
 import { SvgIcon } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Image from "next/image";
+import useAuthStore from "@/store/authStore";
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
+  const login = useAuthStore((state) => state.login);
+  const logout = useAuthStore((state) => state.logout);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    logout();
   };
 
   return (
@@ -109,7 +108,7 @@ const Header = () => {
             </li>
           </ul>
           <div>
-            {isLoggedIn ? (
+            {isAuthenticated ? (
               <>
                 <Link
                   href="/mypage"
@@ -126,12 +125,9 @@ const Header = () => {
               </>
             ) : (
               <>
-                <button
-                  onClick={handleLogin}
-                  className="px-2 py-2 text-gray-400 text-sm"
-                >
+                <Link href="/login" className="px-2 py-2 text-gray-400 text-sm">
                   로그인
-                </button>
+                </Link>
                 <Link
                   href="/signup"
                   className="px-2 py-2 text-gray-400 text-sm"
