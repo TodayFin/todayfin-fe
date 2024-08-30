@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const categories = ["비즈니스", "연예", "위생", "과학", "스포츠", "기술"];
+const categories = ["경제", "생명과학", "제조", "부동산", "유통", "기술"];
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
