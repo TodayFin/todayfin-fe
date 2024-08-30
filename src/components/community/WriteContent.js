@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 const WriteContent = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleTitleChange = (e) => {
@@ -19,18 +20,42 @@ const WriteContent = () => {
     router.back();
   };
 
-  const handleSubmit = () => {
-    router.push("/community");
+  const handleSubmit = async () => {
+    if (!title || !content) {
+      setError("제목과 내용을 모두 입력해주세요.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/community/post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+        body: JSON.stringify({ title, content }),
+      });
+
+      if (response.ok) {
+        router.push("/community");
+      } else {
+        const data = await response.json();
+        setError(data.error || "게시글 등록에 실패했습니다.");
+      }
+    } catch (err) {
+      setError("서버와 통신 중 오류가 발생했습니다.");
+    }
   };
 
   return (
     <div className="container mx-auto p-4">
       <div className="flex items-center mb-4">
-        <button onClick={() => router.back()} className="text-blue-600">
+        <button onClick={handleCancel} className="text-blue-600">
           <span className="mr-2">←</span>뒤로가기
         </button>
       </div>
       <div className="mb-4">
+        {error && <p className="text-red-500">{error}</p>}{" "}
         <input
           type="text"
           placeholder="제목을 입력하세요."
