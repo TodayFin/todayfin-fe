@@ -13,9 +13,10 @@ const SignupPage = () => {
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -23,14 +24,31 @@ const SignupPage = () => {
       return;
     }
 
-    // 회원가입 API 호출
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("Nickname:", nickname);
-    console.log("Name:", name);
-    console.log("Categories:", selectedCategories);
+    try {
+      // 회원가입 API 호출
+      const response = await fetch("/api/user/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          oauthProvider: "local",
+          oauthId: email,
+          password,
+          nickname,
+          name,
+          category: selectedCategories,
+        }),
+      });
 
-    router.push("/login");
+      if (!response.ok) {
+        throw new Error("회원가입에 실패했습니다. 다시 시도해 주세요.");
+      }
+
+      router.push("/login");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   const handleCategoryClick = (category) => {
@@ -49,6 +67,7 @@ const SignupPage = () => {
     <div className="flex justify-center min-h-screen bg-gray-100 pt-16 pb-16">
       <div className="w-full h-full max-w-lg bg-white p-8 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center">회원가입</h2>
+        {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
