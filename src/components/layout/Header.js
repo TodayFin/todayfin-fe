@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { SvgIcon } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Image from "next/image";
@@ -32,7 +31,7 @@ const Header = () => {
           </span>
         </div>
         <div className="flex items-center">
-          <SvgIcon component={SearchIcon} className="cursor-pointer" />
+          {/* <SvgIcon component={SearchIcon} className="cursor-pointer" /> */}{" "}
         </div>
       </div>
       <nav className="bg-white p-2">
