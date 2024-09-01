@@ -3,7 +3,15 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-const ReadContent = ({ title, author, views, date, content, authorId }) => {
+const ReadContent = ({
+  _id,
+  title,
+  author,
+  views,
+  date,
+  content,
+  authorId,
+}) => {
   const [userId, setUserId] = useState(null);
   const router = useRouter();
 
@@ -35,8 +43,29 @@ const ReadContent = ({ title, author, views, date, content, authorId }) => {
     console.log("수정");
   };
 
-  const handleDelete = () => {
-    console.log("삭제");
+  const handleDelete = async () => {
+    const confirmed = confirm("정말로 삭제하시겠습니까?");
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(`/api/community/${_id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      });
+
+      if (response.ok) {
+        alert("게시글이 성공적으로 삭제되었습니다.");
+        router.push("/community");
+      } else {
+        console.error("Failed to delete post");
+        alert("게시글 삭제에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      alert("게시글 삭제 중 오류가 발생했습니다.");
+    }
   };
 
   return (

@@ -44,6 +44,7 @@ const PostPage = ({ params }) => {
 
   return (
     <ReadContent
+      _id={postId}
       title={post.title}
       author={post.author}
       views={post.views}
