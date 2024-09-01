@@ -28,6 +28,7 @@ const PostPage = ({ params }) => {
           views: data.views || 0,
           date: new Date(data.createdAt),
           content: data.content,
+          authorId: data.authorId,
         };
 
         setPost(formattedPost);
@@ -48,6 +49,7 @@ const PostPage = ({ params }) => {
       views={post.views}
       date={post.date}
       content={post.content}
+      authorId={post.authorId}
     />
   );
 };
