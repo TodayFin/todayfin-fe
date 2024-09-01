@@ -39,8 +39,8 @@ const ReadContent = ({
     fetchUserData();
   }, []);
 
-  const handleEdit = () => {
-    console.log("수정");
+  const handleModify = () => {
+    router.push(`/community/${_id}/modify`);
   };
 
   const handleDelete = async () => {
@@ -81,7 +81,7 @@ const ReadContent = ({
           {userId === authorId && (
             <div>
               <button
-                onClick={handleEdit}
+                onClick={handleModify}
                 className="text-blue-600 hover:text-blue-800 mr-4"
               >
                 수정

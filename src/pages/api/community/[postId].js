@@ -57,6 +57,34 @@ const handleRequest = async (req, res) => {
         return res.status(500).json({ error: "Internal server error" });
       }
 
+    case "PUT":
+      try {
+        const { title, content } = req.body;
+
+        const updateResponse = await fetch(
+          `${process.env.BACKEND_URL}/community/${postId}`,
+          {
+            method: "PUT",
+            headers: {
+              Authorization: authorizationHeader,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ title, content }),
+          }
+        );
+
+        if (!updateResponse.ok) {
+          return res
+            .status(updateResponse.status)
+            .json({ error: "Failed to update the post" });
+        }
+
+        return res.status(204).end(); // 204 status with no content
+      } catch (error) {
+        console.error("Error updating post:", error);
+        return res.status(500).json({ error: "Internal server error" });
+      }
+
     default:
       return res.status(405).json({ error: "Method not allowed" });
   }
