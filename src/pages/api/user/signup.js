@@ -17,6 +17,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
+  if (!Array.isArray(category) || category.length !== 3) {
+    return res
+      .status(400)
+      .json({ error: "Category must be an array with exactly 3 items" });
+  }
+
   try {
     const response = await fetch(`${process.env.BACKEND_URL}/user/signup`, {
       method: "POST",

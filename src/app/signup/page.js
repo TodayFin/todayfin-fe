@@ -20,7 +20,12 @@ const SignupPage = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
+      setError("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    if (selectedCategories.length !== 3) {
+      setError("관심있는 카테고리를 3개 선택해주세요.");
       return;
     }
 
@@ -45,7 +50,9 @@ const SignupPage = () => {
         throw new Error("회원가입에 실패했습니다. 다시 시도해 주세요.");
       }
 
-      router.push("/login");
+      alert("회원가입이 성공적으로 완료되었습니다!");
+
+      router.push("/");
     } catch (err) {
       setError(err.message);
     }
@@ -59,7 +66,7 @@ const SignupPage = () => {
     } else if (selectedCategories.length < 3) {
       setSelectedCategories([...selectedCategories, category]);
     } else {
-      alert("최대 3개의 카테고리만 선택 가능합니다.");
+      setError("3개의 카테고리만 선택 가능합니다.");
     }
   };
 
