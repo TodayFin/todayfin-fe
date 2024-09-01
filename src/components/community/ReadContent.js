@@ -5,6 +5,14 @@ import Image from "next/image";
 const ReadContent = ({ title, author, views, date, content }) => {
   const router = useRouter();
 
+  const handleEdit = () => {
+    console.log("수정");
+  };
+
+  const handleDelete = () => {
+    console.log("삭제");
+  };
+
   return (
     <div className="container mx-auto p-4">
       <div className="flex items-center mb-4">
@@ -13,7 +21,23 @@ const ReadContent = ({ title, author, views, date, content }) => {
         </button>
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-4">{title}</h1>
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-bold">{title}</h1>
+          <div>
+            <button
+              onClick={handleEdit}
+              className="text-blue-600 hover:text-blue-800 mr-4"
+            >
+              수정
+            </button>
+            <button
+              onClick={handleDelete}
+              className="text-red-600 hover:text-red-800"
+            >
+              삭제
+            </button>
+          </div>
+        </div>
         <div className="flex items-center mb-4">
           <Image
             src="https://avatars.githubusercontent.com/u/86763857?v=4"
