@@ -29,7 +29,7 @@ const ReadContent = ({ title, author, views, date, content }) => {
             </p>
           </div>
         </div>
-        <div className="text-gray-700 mb-4">{content}</div>
+        <div className="text-gray-700 mb-4 break-all">{content}</div>
       </div>
     </div>
   );

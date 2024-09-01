@@ -8,16 +8,32 @@ const PostPage = ({ params }) => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const mockPost = {
-        title: "주식 초보자를 위한 투자 전략 팁",
-        author: "주린이",
-        views: 15,
-        date: "2024-07-09T15:58:00Z",
-        content:
-          "안녕하세요, 주식 투자에 처음 입문한 초보자입니다.\n요즘 주식 시장의 변동성이 크다 보니 어떻게 투자해야 할지 막막하네요.\n경험 많은 선배 투자자분들께서 주식 투자 시 꼭 알아야 할 기본적인 전략이나 주의해야 할 점에 대해 조언 부탁드립니다. 감사합니다!",
-      };
+      try {
+        const response = await fetch(`/api/community/${postId}`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        });
 
-      setPost(mockPost);
+        if (!response.ok) {
+          throw new Error("Failed to fetch post");
+        }
+
+        const data = await response.json();
+
+        const formattedPost = {
+          title: data.title,
+          author: `User ${data.authorId}`,
+          views: data.views || 0,
+          date: new Date(data.createdAt),
+          content: data.content,
+        };
+
+        setPost(formattedPost);
+      } catch (error) {
+        console.error("Error fetching post:", error);
+      }
     };
 
     fetchPost();
