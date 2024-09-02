@@ -77,7 +77,7 @@ const NewsPage = () => {
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
           {newsData.map((news) => (
             <NewsThumbnailTitleContent
-              key={news._id}
+              id={news._id}
               imageSrc={news.urlToImage || "/placeholder.png"}
               title={news.title_trans || news.title}
               content={news.article_trans || news.article}

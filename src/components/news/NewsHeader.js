@@ -5,6 +5,19 @@ const NewsHeader = ({ title, source, publishedAt, views, content }) => {
   const [summary, setSummary] = useState("뉴스 요약을 불러오는 중...");
   const [isLoading, setIsLoading] = useState(false);
 
+  const formatPublishedAt = (dateString) => {
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    const day = dateString.substring(6, 8);
+    const hours = dateString.substring(9, 11);
+    const minutes = dateString.substring(11, 13);
+    const seconds = dateString.substring(13, 15);
+
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+  };
+
+  const formattedPublishedAt = formatPublishedAt(publishedAt);
+
   // 기사 요약 버튼 클릭 시 요약 레이어 열기
   const handleSummaryClick = async () => {
     setIsSummaryOpen(!isSummaryOpen);
@@ -55,8 +68,8 @@ const NewsHeader = ({ title, source, publishedAt, views, content }) => {
       <h1 className="text-3xl font-bold mb-2">{title}</h1>
       <div className="text-gray-500 mb-2 relative">
         <span>{source} | </span>
-        <span>{new Date(publishedAt).toLocaleString()} | </span>
-        <span>조회 {views}</span>
+        <span>{new Date(formattedPublishedAt).toLocaleString()} | </span>
+        <span>조회 0{/*views*/}</span>
         <button
           className="m-1 px-3 py-2 rounded-lg border bg-gray-200 text-gray-700 ml-4"
           onClick={handleSummaryClick}

@@ -16,7 +16,12 @@ const NewsPage = () => {
     if (newsId) {
       const fetchNewsData = async () => {
         try {
-          const response = await fetch(`/api/news/${newsId}`);
+          const response = await fetch(`/api/news/${newsId}`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+          });
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
@@ -38,20 +43,21 @@ const NewsPage = () => {
       <div className="flex justify-between">
         <div className="w-full md:w-2/3 pr-4">
           <NewsHeader
-            title={newsData.title}
+            title={newsData.title_trans}
             source={newsData.source}
             publishedAt={newsData.publishedAt}
-            views={newsData.views}
-            content={newsData.description}
+            /*views={newsData.views}*/
+            content={newsData.article}
           />
           <NewsContent
-            imageSrc={newsData.urlToImage}
-            content={newsData.description}
+            imageSrc={newsData.urlToImage || "/placeholder.png"}
+            content={newsData.article_trans}
+            url={newsData.url}
           />
-          <ChatRoom comments={newsData.comments} />
+          {/*<ChatRoom comments={newsData.comments} />*/}
         </div>
         <div className="w-full md:w-1/3">
-          <RecommendedNewsSidebar recommended={newsData.recommended} />
+          {/*<RecommendedNewsSidebar recommended={newsData.recommended} />*/}
         </div>
       </div>
     </div>

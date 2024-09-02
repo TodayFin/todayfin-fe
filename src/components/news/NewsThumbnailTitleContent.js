@@ -1,15 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const NewsThumbnailTitleContent = ({ imageSrc, title, content }) => {
+const NewsThumbnailTitleContent = ({ id, imageSrc, title, content }) => {
   return (
-    <Link href="/news/1">
+    <Link href={`/news/${id}`}>
       <div className="flex cursor-pointer">
         <Image
           src={imageSrc}
           alt={title}
           className="w-80 h-48 object-cover rounded-lg mr-4"
-          width={48}
+          width={80}
           height={48}
         />
         <div className="flex-1">
