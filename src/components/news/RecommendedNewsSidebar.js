@@ -35,7 +35,7 @@ const RecommendedNewsSidebar = ({ recommended }) => {
 
   return (
     <div className="bg-white p-4 shadow-md rounded-lg">
-      <h2 className="text-xl font-bold mb-4">추천 뉴스</h2>
+      <h2 className="text-xl font-bold mb-4">🌠 추천 뉴스</h2>
       {newsDetails.map((news, index) => (
         <div key={index} className="mb-4 flex">
           <Link href={`/news/${news._id}`}>

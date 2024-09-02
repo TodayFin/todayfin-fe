@@ -67,14 +67,16 @@ const MainNews = () => {
       <div className="grid grid-cols-1 gap-4">
         {newsData.length > 0 && (
           <NewsThumbnailTitleContent
-            imageSrc={newsData[0].urlToImage || "/logo.png"}
+            id={newsData[0]._id}
+            imageSrc={newsData[0].urlToImage || "/placeholder.png"}
             title={newsData[0].title_trans || newsData[0].title}
             content={newsData[0].article_trans || newsData[0].article}
           />
         )}
         {newsData.length > 1 && (
           <NewsThumbnailTitleContent
-            imageSrc={newsData[1].urlToImage || "/logo.png"}
+            id={newsData[1]._id}
+            imageSrc={newsData[1].urlToImage || "/placeholder.png"}
             title={newsData[1].title_trans || newsData[1].title}
             content={newsData[1].article_trans || newsData[1].article}
           />
@@ -82,8 +84,8 @@ const MainNews = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {newsData.slice(2, 5).map((news) => (
             <NewsThumbnailTitle
-              key={news._id}
-              imageSrc={news.urlToImage || "/logo.png"}
+              id={news._id}
+              imageSrc={news.urlToImage || "/placeholder.png"}
               title={news.title_trans || news.title}
             />
           ))}
