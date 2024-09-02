@@ -67,6 +67,7 @@ const MainNews = () => {
       <div className="grid grid-cols-1 gap-4">
         {newsData.length > 0 && (
           <NewsThumbnailTitleContent
+            key={newsData[0]._id}
             id={newsData[0]._id}
             imageSrc={newsData[0].urlToImage || "/placeholder.png"}
             title={newsData[0].title_trans || newsData[0].title}
@@ -75,6 +76,7 @@ const MainNews = () => {
         )}
         {newsData.length > 1 && (
           <NewsThumbnailTitleContent
+            key={newsData[1]._id}
             id={newsData[1]._id}
             imageSrc={newsData[1].urlToImage || "/placeholder.png"}
             title={newsData[1].title_trans || newsData[1].title}
