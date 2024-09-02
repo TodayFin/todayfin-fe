@@ -68,6 +68,50 @@ const NewsPage = () => {
     setCurrentPage(1);
   };
 
+  const renderPagination = () => {
+    const maxPagesToShow = 10;
+    const startPage =
+      Math.floor((currentPage - 1) / maxPagesToShow) * maxPagesToShow + 1;
+    const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
+
+    const pages = [];
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(
+        <button
+          key={i}
+          className={`w-8 h-8 mx-1 px-2 py-1 rounded ${
+            currentPage === i ? "bg-blue-500 text-white" : "bg-gray-200"
+          }`}
+          onClick={() => handlePageChange(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    return (
+      <>
+        {startPage > 1 && (
+          <button
+            className="w-8 h-8 mx-1 px-2 py-1 rounded bg-gray-200"
+            onClick={() => handlePageChange(startPage - 1)}
+          >
+            &lt;
+          </button>
+        )}
+        {pages}
+        {endPage < totalPages && (
+          <button
+            className="w-8 h-8 mx-1 px-2 py-1 rounded bg-gray-200"
+            onClick={() => handlePageChange(endPage + 1)}
+          >
+            &gt;
+          </button>
+        )}
+      </>
+    );
+  };
+
   return (
     <div className="container mx-auto p-4">
       <SelectCategory onSelect={handleCategorySelect} />{" "}
@@ -77,6 +121,7 @@ const NewsPage = () => {
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
           {newsData.map((news) => (
             <NewsThumbnailTitleContent
+              key={news._id}
               id={news._id}
               imageSrc={news.urlToImage || "/placeholder.png"}
               title={news.title_trans || news.title}
@@ -84,21 +129,7 @@ const NewsPage = () => {
             />
           ))}
         </div>
-        <div className="flex justify-center mt-4">
-          {Array.from({ length: totalPages }).map((_, index) => (
-            <button
-              key={index}
-              className={`w-8 h-8 mx-1 px-2 py-1 rounded ${
-                currentPage === index + 1
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200"
-              }`}
-              onClick={() => handlePageChange(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
-        </div>
+        <div className="flex justify-center mt-4">{renderPagination()}</div>
       </div>
     </div>
   );
