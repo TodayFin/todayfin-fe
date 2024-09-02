@@ -86,6 +86,7 @@ const MainNews = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {newsData.slice(2, 5).map((news) => (
             <NewsThumbnailTitle
+              key={news._id}
               id={news._id}
               imageSrc={news.urlToImage || "/placeholder.png"}
               title={news.title_trans || news.title}
