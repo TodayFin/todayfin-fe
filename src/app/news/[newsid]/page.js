@@ -11,9 +11,35 @@ const NewsPage = () => {
   const newsId = pathname.split("/").pop();
 
   const [newsData, setNewsData] = useState(null);
+  const [recommendedNews, setRecommendedNews] = useState([]);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    if (newsId) {
+    const fetchUserId = async () => {
+      try {
+        const response = await fetch(`/api/user/detail`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user details");
+        }
+
+        const data = await response.json();
+        setUserId(data._id);
+      } catch (error) {
+        console.error("Error fetching user ID:", error);
+      }
+    };
+
+    fetchUserId();
+  }, []);
+
+  useEffect(() => {
+    if (newsId && userId) {
       const fetchNewsData = async () => {
         try {
           const response = await fetch(`/api/news/${newsId}`, {
@@ -27,6 +53,22 @@ const NewsPage = () => {
           }
           const data = await response.json();
           setNewsData(data);
+
+          const recommendResponse = await fetch(`/api/news/recommend`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: userId }),
+          });
+
+          if (!recommendResponse.ok) {
+            throw new Error("Failed to fetch recommended news");
+          }
+
+          const recommendData = await recommendResponse.json();
+          setRecommendedNews(recommendData.recommend);
         } catch (error) {
           console.error("Error fetching news data:", error);
         }
@@ -34,7 +76,7 @@ const NewsPage = () => {
 
       fetchNewsData();
     }
-  }, [newsId]);
+  }, [newsId, userId]);
 
   if (!newsData) return <div>Loading...</div>;
 
@@ -57,7 +99,7 @@ const NewsPage = () => {
           {/*<ChatRoom comments={newsData.comments} />*/}
         </div>
         <div className="w-full md:w-1/3">
-          {/*<RecommendedNewsSidebar recommended={newsData.recommended} />*/}
+          <RecommendedNewsSidebar recommended={recommendedNews} />
         </div>
       </div>
     </div>
