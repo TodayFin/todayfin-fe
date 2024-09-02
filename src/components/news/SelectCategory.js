@@ -1,7 +1,15 @@
 "use client";
 import { useState } from "react";
 
-const categories = ["전체", "비즈니스", "연예", "위생", "과학", "스포츠", "기술"];
+const categories = [
+  "전체",
+  "경제",
+  "생명과학",
+  "제조",
+  "부동산",
+  "유통",
+  "기술",
+];
 
 const SelectCategory = ({ onSelect }) => {
   const [selectedCategory, setSelectedCategory] = useState("전체");

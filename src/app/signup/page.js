@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const categories = ["비즈니스", "연예", "위생", "과학", "스포츠", "기술"];
+const categories = ["경제", "생명과학", "제조", "부동산", "유통", "기술"];
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
@@ -13,24 +13,49 @@ const SignupPage = () => {
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
+      setError("비밀번호가 일치하지 않습니다.");
       return;
     }
 
-    // 회원가입 API 호출
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("Nickname:", nickname);
-    console.log("Name:", name);
-    console.log("Categories:", selectedCategories);
+    if (selectedCategories.length !== 3) {
+      setError("관심있는 카테고리를 3개 선택해주세요.");
+      return;
+    }
 
-    router.push("/login");
+    try {
+      // 회원가입 API 호출
+      const response = await fetch("/api/user/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          oauthProvider: "local",
+          oauthId: email,
+          password,
+          nickname,
+          name,
+          category: selectedCategories,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("회원가입에 실패했습니다. 다시 시도해 주세요.");
+      }
+
+      alert("회원가입이 성공적으로 완료되었습니다!");
+
+      router.push("/");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   const handleCategoryClick = (category) => {
@@ -41,7 +66,7 @@ const SignupPage = () => {
     } else if (selectedCategories.length < 3) {
       setSelectedCategories([...selectedCategories, category]);
     } else {
-      alert("최대 3개의 카테고리만 선택 가능합니다.");
+      setError("3개의 카테고리만 선택 가능합니다.");
     }
   };
 
@@ -49,6 +74,7 @@ const SignupPage = () => {
     <div className="flex justify-center min-h-screen bg-gray-100 pt-16 pb-16">
       <div className="w-full h-full max-w-lg bg-white p-8 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center">회원가입</h2>
+        {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
