@@ -8,7 +8,7 @@ const NewsThumbnailTitleContent = ({ imageSrc, title, content }) => {
         <Image
           src={imageSrc}
           alt={title}
-          className="w-80 h-48 object-cover rounded-lg"
+          className="w-80 h-48 object-cover rounded-lg mr-4"
           width={48}
           height={48}
         />
