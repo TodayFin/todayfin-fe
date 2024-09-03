@@ -1,13 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const MyPage = () => {
-  const [email, setEmail] = useState("user@example.com");
-  const [nickname, setNickname] = useState("사용자 닉네임");
+  const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("/api/user/detail", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("사용자 정보를 가져오는데 실패했습니다.");
+        }
+
+        const data = await response.json();
+        setEmail(data.oauthId);
+        setNickname(data.nickname);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
