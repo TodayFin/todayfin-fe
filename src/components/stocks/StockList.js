@@ -101,13 +101,13 @@ const StockList = () => {
               <td className="py-2">{startIndex + index + 1}</td>
               <td className="py-2 text-left">{stock.name}</td>
               <td className="py-2 font-semibold text-right">
-                {stock.data[0]?.open}
+                {stock.data[0]?.open.slice(0, 6)}
               </td>
               <td className="py-2 text-red-500 text-right">
-                {stock.data[0]?.high}
+                {stock.data[0]?.high.slice(0, 6)}
               </td>
               <td className="py-2 text-blue-500 text-right">
-                {stock.data[0]?.low}
+                {stock.data[0]?.low.slice(0, 6)}
               </td>
               <td className="py-2 text-right">{stock.data[0]?.volume}</td>
             </tr>
