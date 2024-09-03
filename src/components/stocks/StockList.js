@@ -84,6 +84,11 @@ const StockList = () => {
           </select>
         </div>
       </div>
+      <div className="flex justify-end items-center mt-4">
+        <span className="text-gray-500 text-sm cursor-pointer">
+          단위: 미국 달러(USD)
+        </span>
+      </div>
       <table className="min-w-full bg-white">
         <thead>
           <tr>
