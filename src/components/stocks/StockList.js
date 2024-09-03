@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import StockChartPopup from "./StockChartPopup";
 
 const StockList = () => {
   const [stockData, setStockData] = useState([]);
@@ -8,6 +9,8 @@ const StockList = () => {
   const [sortedData, setSortedData] = useState([]);
   const [sortKey, setSortKey] = useState("open");
   const [sortOrder, setSortOrder] = useState("desc");
+  const [selectedStock, setSelectedStock] = useState(null);
+  const [selectedStockData, setSelectedStockData] = useState(null);
 
   useEffect(() => {
     const fetchStockData = async () => {
@@ -50,15 +53,24 @@ const StockList = () => {
     setSortOrder(order);
   };
 
+  const handleStockClick = (stockName) => {
+    setSelectedStock(stockName);
+    const stock = stockData.find((item) => item.name === stockName);
+    if (stock) {
+      setSelectedStockData(stock.data);
+    }
+  };
+
+  const closeChartPopup = () => {
+    setSelectedStock(null);
+    setSelectedStockData(null);
+  };
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const displayedItems = sortedData.slice(
     startIndex,
     startIndex + itemsPerPage
   );
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
 
   return (
     <div className="p-4 bg-white shadow-md rounded-lg">
@@ -102,7 +114,11 @@ const StockList = () => {
         </thead>
         <tbody>
           {displayedItems.map((stock, index) => (
-            <tr key={index} className="text-center border-b border-gray-200">
+            <tr
+              key={index}
+              className="text-center border-b border-gray-200 cursor-pointer"
+              onClick={() => handleStockClick(stock.name)}
+            >
               <td className="py-2">{startIndex + index + 1}</td>
               <td className="py-2 text-left">{stock.name}</td>
               <td className="py-2 font-semibold text-right">
@@ -136,6 +152,13 @@ const StockList = () => {
           </button>
         ))}
       </div>
+      {selectedStockData && (
+        <StockChartPopup
+          name={selectedStock}
+          data={selectedStockData}
+          onClose={closeChartPopup}
+        />
+      )}
     </div>
   );
 };
