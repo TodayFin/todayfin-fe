@@ -1,9 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
+
 const StockList = () => {
   const [stockData, setStockData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const [sortedData, setSortedData] = useState([]);
+  const [sortKey, setSortKey] = useState("open");
+  const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
     const fetchStockData = async () => {
@@ -19,8 +23,38 @@ const StockList = () => {
     fetchStockData();
   }, []);
 
+  useEffect(() => {
+    const sortStockData = () => {
+      const sorted = [...stockData].sort((a, b) => {
+        const aValue = parseFloat(a.data[0][sortKey]);
+        const bValue = parseFloat(b.data[0][sortKey]);
+
+        if (sortOrder === "asc") {
+          return aValue - bValue;
+        } else {
+          return bValue - aValue;
+        }
+      });
+
+      setSortedData(sorted);
+    };
+
+    if (stockData.length > 0) {
+      sortStockData();
+    }
+  }, [sortKey, sortOrder, stockData]);
+
+  const handleSortChange = (e) => {
+    const [key, order] = e.target.value.split("-");
+    setSortKey(key);
+    setSortOrder(order);
+  };
+
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const displayedItems = stockData.slice(startIndex, startIndex + itemsPerPage);
+  const displayedItems = sortedData.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -28,7 +62,28 @@ const StockList = () => {
 
   return (
     <div className="p-4 bg-white shadow-md rounded-lg">
-      <h2 className="text-xl font-bold mb-4">📊 주식 차트</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-bold mb-4">📊 주식 차트</h2>
+        <div>
+          <label htmlFor="sort" className="mr-2">
+            정렬:
+          </label>
+          <select
+            id="sort"
+            value={`${sortKey}-${sortOrder}`}
+            onChange={handleSortChange}
+          >
+            <option value="open-desc">시가 내림차순</option>
+            <option value="open-asc">시가 오름차순</option>
+            <option value="high-desc">당일 최고가 내림차순</option>
+            <option value="high-asc">당일 최고가 오름차순</option>
+            <option value="low-desc">당일 최저가 내림차순</option>
+            <option value="low-asc">당일 최저가 오름차순</option>
+            <option value="volume-desc">거래량 내림차순</option>
+            <option value="volume-asc">거래량 오름차순</option>
+          </select>
+        </div>
+      </div>
       <table className="min-w-full bg-white">
         <thead>
           <tr>
@@ -46,15 +101,15 @@ const StockList = () => {
               <td className="py-2">{startIndex + index + 1}</td>
               <td className="py-2 text-left">{stock.name}</td>
               <td className="py-2 font-semibold text-right">
-                {stock.data[0].open}
+                {stock.data[0]?.open}
               </td>
               <td className="py-2 text-red-500 text-right">
-                {stock.data[0].high}
+                {stock.data[0]?.high}
               </td>
               <td className="py-2 text-blue-500 text-right">
-                {stock.data[0].low}
+                {stock.data[0]?.low}
               </td>
-              <td className="py-2 text-right">{stock.data[0].volume}</td>
+              <td className="py-2 text-right">{stock.data[0]?.volume}</td>
             </tr>
           ))}
         </tbody>
