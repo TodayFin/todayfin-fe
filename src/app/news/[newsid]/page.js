@@ -1,18 +1,32 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import NewsHeader from "@/components/news/NewsHeader";
 import NewsContent from "@/components/news/NewsContent";
 import RecommendedNewsSidebar from "@/components/news/RecommendedNewsSidebar";
 import ChatRoom from "@/components/news/chat/ChatRoom";
+import useAuthStore from "@/store/authStore";
 
 const NewsPage = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const newsId = pathname.split("/").pop();
 
   const [newsData, setNewsData] = useState(null);
   const [recommendedNews, setRecommendedNews] = useState([]);
   const [userId, setUserId] = useState(null);
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const restoreAuth = useAuthStore((state) => state.restoreAuth);
+
+  useEffect(() => {
+    restoreAuth();
+
+    if (!isAuthenticated) {
+      alert("로그인이 필요합니다.");
+      router.push("/login");
+    }
+  }, [isAuthenticated, restoreAuth, router]);
 
   useEffect(() => {
     const fetchUserId = async () => {
