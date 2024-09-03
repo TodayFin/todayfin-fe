@@ -1,92 +1,27 @@
 "use client";
 import { useState, useEffect } from "react";
 const SearchTop10 = () => {
-  const top10Data = [
-    {
-      rank: 1,
-      name: "KODEX 200선물인버스-2X",
-      price: "1,754",
-      dailyHigh: "123",
-      dailyLow: "123",
-      volume: "123",
-    },
-    {
-      rank: 2,
-      name: "KODEX 200선물인버스-2X",
-      price: "1,754",
-      dailyHigh: "123",
-      dailyLow: "123",
-      volume: "123",
-    },
-    {
-      rank: 3,
-      name: "KODEX 200선물인버스-2X",
-      price: "1,754",
-      dailyHigh: "123",
-      dailyLow: "123",
-      volume: "123",
-    },
-    {
-      rank: 4,
-      name: "KODEX 200선물인버스-2X",
-      price: "1,754",
-      dailyHigh: "123",
-      dailyLow: "123",
-      volume: "123",
-    },
-    {
-      rank: 5,
-      name: "KODEX 200선물인버스-2X",
-      price: "1,754",
-      dailyHigh: "123",
-      dailyLow: "123",
-      volume: "123",
-    },
-    {
-      rank: 6,
-      name: "KODEX 200선물인버스-2X",
-      price: "1,754",
-      dailyHigh: "123",
-      dailyLow: "123",
-      volume: "123",
-    },
-    {
-      rank: 7,
-      name: "KODEX 200선물인버스-2X",
-      price: "1,754",
-      dailyHigh: "123",
-      dailyLow: "123",
-      volume: "123",
-    },
-    {
-      rank: 8,
-      name: "KODEX 200선물인버스-2X",
-      price: "1,754",
-      dailyHigh: "123",
-      dailyLow: "123",
-      volume: "123",
-    },
-    {
-      rank: 9,
-      name: "KODEX 200선물인버스-2X",
-      price: "1,754",
-      dailyHigh: "123",
-      dailyLow: "123",
-      volume: "123",
-    },
-    {
-      rank: 10,
-      name: "KODEX 200선물인버스-2X",
-      price: "1,754",
-      dailyHigh: "123",
-      dailyLow: "123",
-      volume: "123",
-    },
-  ];
+  const [stockData, setStockData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
+
+  useEffect(() => {
+    const fetchStockData = async () => {
+      try {
+        const response = await fetch("/api/stocks");
+        const data = await response.json();
+        setStockData(data);
+      } catch (error) {
+        console.error("데이터를 가져오는데 실패했습니다.", error);
+      }
+    };
+
+    fetchStockData();
+  }, []);
+
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const displayedItems = top10Data.slice(startIndex, startIndex + itemsPerPage);
+  const displayedItems = stockData.slice(startIndex, startIndex + itemsPerPage);
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -108,23 +43,25 @@ const SearchTop10 = () => {
         <tbody>
           {displayedItems.map((stock, index) => (
             <tr key={index} className="text-center border-b border-gray-200">
-              <td className="py-2">{stock.rank}</td>
+              <td className="py-2">{startIndex + index + 1}</td>
               <td className="py-2 text-left">{stock.name}</td>
-              <td className="py-2 font-semibold text-right">{stock.price}</td>
+              <td className="py-2 font-semibold text-right">
+                {stock.data[0].open}
+              </td>
               <td className="py-2 text-red-500 text-right">
-                {stock.dailyHigh}
+                {stock.data[0].high}
               </td>
               <td className="py-2 text-blue-500 text-right">
-                {stock.dailyLow}
+                {stock.data[0].low}
               </td>
-              <td className="py-2 text-right">{stock.volume}</td>
+              <td className="py-2 text-right">{stock.data[0].volume}</td>
             </tr>
           ))}
         </tbody>
       </table>
       <div className="flex justify-center mt-4">
         {Array.from({
-          length: Math.ceil(top10Data.length / itemsPerPage),
+          length: Math.ceil(stockData.length / itemsPerPage),
         }).map((_, index) => (
           <button
             key={index}
