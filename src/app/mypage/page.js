@@ -34,19 +34,56 @@ const MyPage = () => {
     fetchUserData();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!currentPassword || !newPassword || !confirmNewPassword) {
+      alert("모든 필드를 입력해 주세요.");
+      return;
+    }
 
     if (newPassword !== confirmNewPassword) {
       alert("새 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
       return;
     }
 
-    // 비밀번호 수정 API 호출
-    console.log("현재 비밀번호:", currentPassword);
-    console.log("새 비밀번호:", newPassword);
+    try {
+      // 현재 비밀번호 확인
+      const loginResponse = await fetch("/api/user/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          oauthId: email,
+          password: currentPassword,
+        }),
+      });
 
-    alert("비밀번호가 성공적으로 변경되었습니다.");
+      if (!loginResponse.ok) {
+        throw new Error("현재 비밀번호가 올바르지 않습니다.");
+      }
+
+      // 비밀번호 변경 API 호출
+      const updatePasswordResponse = await fetch("/api/user/detail", {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password: newPassword,
+        }),
+      });
+
+      if (!updatePasswordResponse.ok) {
+        throw new Error("비밀번호 변경에 실패했습니다.");
+      }
+
+      alert("비밀번호가 성공적으로 변경되었습니다.");
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
