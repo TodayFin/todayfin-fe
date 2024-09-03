@@ -5,10 +5,18 @@ import SelectDay from "@/components/news/SelectDay";
 import NewsThumbnailTitleContent from "@/components/news/NewsThumbnailTitleContent";
 
 const NewsPage = () => {
+  const formattedToday = new Date()
+    .toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .replace(/\s/g, "");
+
   const [newsData, setNewsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(formattedToday);
   const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState("");
 
