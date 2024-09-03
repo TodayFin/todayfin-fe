@@ -41,7 +41,7 @@ const Header = () => {
               <Link href="/stock" className="hover:underline text-sm">
                 📈 주식
               </Link>
-              <ul className="absolute left-0 hidden bg-white text-black group-hover:block">
+              {/* <ul className="absolute left-0 hidden bg-white text-black group-hover:block">
                 <li className="px-4 py-2">
                   <Link href="/stock/category1" className="block">
                     category1
@@ -52,13 +52,13 @@ const Header = () => {
                     category2
                   </Link>
                 </li>
-              </ul>
+              </ul> */}
             </li>
             <li className="relative group">
               <Link href="/coin" className="hover:underline text-sm">
                 🪙 암호화폐
               </Link>
-              <ul className="absolute left-0 hidden bg-white text-black group-hover:block">
+              {/* <ul className="absolute left-0 hidden bg-white text-black group-hover:block">
                 <li className="px-4 py-2">
                   <Link href="/coin/category1" className="block">
                     category1
@@ -69,13 +69,13 @@ const Header = () => {
                     category2
                   </Link>
                 </li>
-              </ul>
+              </ul> */}
             </li>
             <li className="relative group">
               <Link href="/news" className="hover:underline text-sm">
                 📰 뉴스
               </Link>
-              <ul className="absolute left-0 hidden bg-white text-black group-hover:block">
+              {/* <ul className="absolute left-0 hidden bg-white text-black group-hover:block">
                 <li className="px-4 py-2">
                   <Link href="/news/category1" className="block">
                     category1
@@ -86,13 +86,13 @@ const Header = () => {
                     category2
                   </Link>
                 </li>
-              </ul>
+              </ul> */}
             </li>
             <li className="relative group">
               <Link href="/community" className="hover:underline text-sm">
                 💁 커뮤니티
               </Link>
-              <ul className="absolute left-0 hidden bg-white text-black group-hover:block">
+              {/* <ul className="absolute left-0 hidden bg-white text-black group-hover:block">
                 <li className="px-4 py-2">
                   <Link href="/community/category1" className="block">
                     category1
@@ -103,7 +103,7 @@ const Header = () => {
                     category2
                   </Link>
                 </li>
-              </ul>
+              </ul> */}
             </li>
           </ul>
           <div>
