@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-const SearchTop10 = () => {
+const StockList = () => {
   const [stockData, setStockData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -80,4 +80,4 @@ const SearchTop10 = () => {
   );
 };
 
-export default SearchTop10;
+export default StockList;
