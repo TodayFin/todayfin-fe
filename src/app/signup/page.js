@@ -6,6 +6,16 @@ import Link from "next/link";
 
 const categories = ["경제", "생명과학", "제조", "부동산", "유통", "기술"];
 
+const categoryMap = {
+  전체: null,
+  경제: "finance",
+  생명과학: "life_sciences",
+  제조: "manufacturing",
+  부동산: "real_estate",
+  유통: "retail_wholesale",
+  기술: "technology",
+};
+
 const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -59,12 +69,12 @@ const SignupPage = () => {
   };
 
   const handleCategoryClick = (category) => {
-    if (selectedCategories.includes(category)) {
+    if (selectedCategories.includes(categoryMap[category])) {
       setSelectedCategories(
-        selectedCategories.filter((cat) => cat !== category)
+        selectedCategories.filter((cat) => cat !== categoryMap[category])
       );
     } else if (selectedCategories.length < 3) {
-      setSelectedCategories([...selectedCategories, category]);
+      setSelectedCategories([...selectedCategories, categoryMap[category]]);
     } else {
       setError("3개의 카테고리만 선택 가능합니다.");
     }
@@ -166,7 +176,7 @@ const SignupPage = () => {
                   type="button"
                   key={category}
                   className={`m-1 px-3 py-2 rounded-lg border ${
-                    selectedCategories.includes(category)
+                    selectedCategories.includes(categoryMap[category])
                       ? "bg-blue-500 text-white"
                       : "bg-gray-200 text-gray-700"
                   }`}
