@@ -2,10 +2,25 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import CommunityCard from "@/components/community/CommunityCard";
+import { useRouter } from "next/navigation";
+import useAuthStore from "@/store/authStore";
 
 const CommunityPage = () => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
+
+  const router = useRouter();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const restoreAuth = useAuthStore((state) => state.restoreAuth);
+
+  useEffect(() => {
+    restoreAuth();
+
+    if (!isAuthenticated) {
+      alert("로그인이 필요합니다.");
+      router.push("/login");
+    }
+  }, [isAuthenticated, restoreAuth, router]);
 
   useEffect(() => {
     const fetchPosts = async () => {

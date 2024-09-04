@@ -1,27 +1,89 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const MyPage = () => {
-  const [email, setEmail] = useState("user@example.com");
-  const [nickname, setNickname] = useState("사용자 닉네임");
+  const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("/api/user/detail", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("사용자 정보를 가져오는데 실패했습니다.");
+        }
+
+        const data = await response.json();
+        setEmail(data.oauthId);
+        setNickname(data.nickname);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!currentPassword || !newPassword || !confirmNewPassword) {
+      alert("모든 필드를 입력해 주세요.");
+      return;
+    }
 
     if (newPassword !== confirmNewPassword) {
       alert("새 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
       return;
     }
 
-    // 비밀번호 수정 API 호출
-    console.log("현재 비밀번호:", currentPassword);
-    console.log("새 비밀번호:", newPassword);
+    try {
+      // 현재 비밀번호 확인
+      const loginResponse = await fetch("/api/user/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          oauthId: email,
+          password: currentPassword,
+        }),
+      });
 
-    alert("비밀번호가 성공적으로 변경되었습니다.");
+      if (!loginResponse.ok) {
+        throw new Error("현재 비밀번호가 올바르지 않습니다.");
+      }
+
+      // 비밀번호 변경 API 호출
+      const updatePasswordResponse = await fetch("/api/user/detail", {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password: newPassword,
+        }),
+      });
+
+      if (!updatePasswordResponse.ok) {
+        throw new Error("비밀번호 변경에 실패했습니다.");
+      }
+
+      alert("비밀번호가 성공적으로 변경되었습니다.");
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
