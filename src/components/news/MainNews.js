@@ -38,13 +38,17 @@ const MainNews = () => {
     };
 
     const loadNews = async () => {
-      const today = new Date();
-      let news = await fetchLatestNews(today);
+      let currentDate = new Date();
+      let news = [];
+      const maxAttempts = 30;
+      let attempts = 0;
 
-      if (news.length === 0) {
-        const yesterday = new Date();
-        yesterday.setDate(today.getDate() - 1);
-        news = await fetchLatestNews(yesterday);
+      while (news.length === 0 && attempts < maxAttempts) {
+        news = await fetchLatestNews(currentDate);
+        if (news.length === 0) {
+          currentDate.setDate(currentDate.getDate() - 1);
+          attempts++;
+        }
       }
 
       setNewsData(news);
