@@ -1,37 +1,33 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import dynamic from "next/dynamic";
+
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const StockChartPopup = ({ name, data, onClose }) => {
   const chartData = {
-    labels: data.map((entry) => entry.date.slice(5)),
-    datasets: [
+    series: [
       {
-        data: data.map((entry) => entry.close),
-        fill: false,
-        borderColor: "rgba(75,192,192,1)",
-        tension: 0.1,
+        data: data.map((entry) => ({
+          x: new Date(entry.date).getTime(),
+          y: [entry.open, entry.high, entry.low, entry.close].map(parseFloat),
+        })),
       },
     ],
-  };
-
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
+    options: {
+      chart: {
+        type: "candlestick",
+        height: 350,
       },
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: "Date",
-        },
+      title: {
+        text: name,
+        align: "left",
       },
-      y: {
-        title: {
-          display: true,
-          text: "Price (USD)",
+      xaxis: {
+        type: "datetime",
+      },
+      yaxis: {
+        tooltip: {
+          enabled: true,
         },
       },
     },
@@ -46,7 +42,12 @@ const StockChartPopup = ({ name, data, onClose }) => {
             Close
           </button>
         </div>
-        <Line data={chartData} options={options} />
+        <Chart
+          options={chartData.options}
+          series={chartData.series}
+          type="candlestick"
+          height={350}
+        />
       </div>
     </div>
   );
