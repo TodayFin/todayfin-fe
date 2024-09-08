@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import NewsThumbnailTitle from "./NewsThumbnailTitle";
 import NewsThumbnailTitleContent from "./NewsThumbnailTitleContent";
 
@@ -66,7 +67,12 @@ const MainNews = () => {
     <div className="p-4 bg-white shadow-md rounded-lg">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold">📰 최신 뉴스</h2>
-        <span className="text-gray-500 text-sm cursor-pointer">더보기</span>
+        <Link
+          href="/news"
+          className="text-gray-500 text-sm cursor-pointer hover:text-gray-700 transition-colors"
+        >
+          더보기
+        </Link>{" "}
       </div>
       <div className="grid grid-cols-1 gap-4">
         {newsData.length > 0 && (
