@@ -68,7 +68,6 @@ const USGDP = () => {
     <div className="p-4 bg-white shadow-md rounded-lg">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold">📈 미국 Real GDP</h2>
-        <span className="text-gray-500 text-sm cursor-pointer">더보기</span>
       </div>
       <div className="mb-2">
         <Line data={chartData} options={options} />
