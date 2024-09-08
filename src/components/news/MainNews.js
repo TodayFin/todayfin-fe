@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import NewsThumbnailTitle from "./NewsThumbnailTitle";
 import NewsThumbnailTitleContent from "./NewsThumbnailTitleContent";
 
@@ -38,13 +39,17 @@ const MainNews = () => {
     };
 
     const loadNews = async () => {
-      const today = new Date();
-      let news = await fetchLatestNews(today);
+      let currentDate = new Date();
+      let news = [];
+      const maxAttempts = 30;
+      let attempts = 0;
 
-      if (news.length === 0) {
-        const yesterday = new Date();
-        yesterday.setDate(today.getDate() - 1);
-        news = await fetchLatestNews(yesterday);
+      while (news.length === 0 && attempts < maxAttempts) {
+        news = await fetchLatestNews(currentDate);
+        if (news.length === 0) {
+          currentDate.setDate(currentDate.getDate() - 1);
+          attempts++;
+        }
       }
 
       setNewsData(news);
@@ -62,7 +67,12 @@ const MainNews = () => {
     <div className="p-4 bg-white shadow-md rounded-lg">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold">📰 최신 뉴스</h2>
-        <span className="text-gray-500 text-sm cursor-pointer">더보기</span>
+        <Link
+          href="/news"
+          className="text-gray-500 text-sm cursor-pointer hover:text-gray-700 transition-colors"
+        >
+          더보기
+        </Link>{" "}
       </div>
       <div className="grid grid-cols-1 gap-4">
         {newsData.length > 0 && (
