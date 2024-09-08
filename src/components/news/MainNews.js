@@ -3,6 +3,12 @@ import { useEffect, useState } from "react";
 import NewsThumbnailTitle from "./NewsThumbnailTitle";
 import NewsThumbnailTitleContent from "./NewsThumbnailTitleContent";
 
+const Spinner = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+);
+
 const MainNews = () => {
   const [newsData, setNewsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -55,7 +61,7 @@ const MainNews = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return (

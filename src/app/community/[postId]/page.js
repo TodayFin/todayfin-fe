@@ -4,6 +4,12 @@ import ReadContent from "@/components/community/ReadContent";
 import { useRouter } from "next/navigation";
 import useAuthStore from "@/store/authStore";
 
+const Spinner = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+);
+
 const PostPage = ({ params }) => {
   const { postId } = params;
   const [post, setPost] = useState(null);
@@ -53,7 +59,7 @@ const PostPage = ({ params }) => {
     fetchPost();
   }, [postId]);
 
-  if (!post) return <div>Loading...</div>;
+  if (!post) return <Spinner />;
 
   return (
     <ReadContent

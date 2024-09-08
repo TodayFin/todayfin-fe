@@ -4,8 +4,13 @@ import { useEffect, useState } from "react";
 import NewsHeader from "@/components/news/NewsHeader";
 import NewsContent from "@/components/news/NewsContent";
 import RecommendedNewsSidebar from "@/components/news/RecommendedNewsSidebar";
-import ChatRoom from "@/components/news/chat/ChatRoom";
 import useAuthStore from "@/store/authStore";
+
+const Spinner = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+);
 
 const NewsPage = () => {
   const pathname = usePathname();
@@ -92,7 +97,7 @@ const NewsPage = () => {
     }
   }, [newsId, userId]);
 
-  if (!newsData) return <div>Loading...</div>;
+  if (!newsData) return <Spinner />;
 
   return (
     <div className="container mx-auto p-4">

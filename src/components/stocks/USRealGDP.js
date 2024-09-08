@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 
+const Spinner = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+);
+
 const USGDP = () => {
   const [gdpData, setGDPData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,7 +29,7 @@ const USGDP = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   if (!gdpData) {

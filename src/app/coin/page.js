@@ -2,6 +2,12 @@
 import React, { useState, useEffect } from "react";
 import CoinList from "@/components/coin/CoinList";
 
+const Spinner = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+);
+
 const CoinPage = () => {
   const [coinData, setCoinData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +40,7 @@ const CoinPage = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   if (error) {

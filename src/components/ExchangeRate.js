@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 
+const Spinner = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+);
+
 const ExchangeRate = () => {
   const [exchangeRates, setExchangeRates] = useState([]);
   const [date, setDate] = useState("");
@@ -25,7 +31,7 @@ const ExchangeRate = () => {
   }, []);
 
   if (exchangeRates.length === 0) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return (
@@ -48,7 +54,9 @@ const ExchangeRate = () => {
         ))}
       </div>
       <div className="flex justify-end items-center mt-4">
-        <span className="text-gray-500 text-sm cursor-pointer">단위: 원화(KRW)</span>
+        <span className="text-gray-500 text-sm cursor-pointer">
+          단위: 원화(KRW)
+        </span>
       </div>
     </div>
   );
