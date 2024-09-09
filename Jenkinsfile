@@ -10,6 +10,7 @@ pipeline {
         ALPHA_VANTAGE_BACKEND_URL = credentials('alpha_vantage_backend_url')
         BACKEND_URL = credentials('BACKEND_URL')
         RECOMMEND_AI_URL = credentials('RECOMMEND_AI_URL')
+        NEXT_PUBLIC_SOCKET_URL = credentials('NEXT_PUBLIC_SOCKET_URL')
     }
     stages {
         stage('Checkout') {
@@ -48,7 +49,7 @@ pipeline {
                         sh "docker pull ${ECR_REPO}:latest"
 
                         // 도커 컨테이너 실행
-                        sh "docker run -d -e BACKEND_URL=${BACKEND_URL} -e RECOMMEND_AI_URL=${RECOMMEND_AI_URL} -e ALPHA_VANTAGE_API_KEY=${ALPHA_VANTAGE_API_KEY} -e HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY} -e ALPHA_VANTAGE_BACKEND_URL=${ALPHA_VANTAGE_BACKEND_URL} --name todayfin-fe -p 3000:3000 ${ECR_REPO}:latest"
+                        sh "docker run -d -e BACKEND_URL=${BACKEND_URL} -e NEXT_PUBLIC_SOCKET_URL=${NEXT_PUBLIC_SOCKET_URL} -e RECOMMEND_AI_URL=${RECOMMEND_AI_URL} -e ALPHA_VANTAGE_API_KEY=${ALPHA_VANTAGE_API_KEY} -e HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY} -e ALPHA_VANTAGE_BACKEND_URL=${ALPHA_VANTAGE_BACKEND_URL} --name todayfin-fe -p 3000:3000 ${ECR_REPO}:latest"
 
                         // Docker 이미지 리스트를 가져오고, <none> 태그 이미지 정렬 및 필터링
                         // 최신 5개를 제외한 이미지 ID 추출
