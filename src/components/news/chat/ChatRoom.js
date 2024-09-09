@@ -13,6 +13,13 @@ const ChatRoom = ({ newsId }) => {
 
   const currentUserId = 1;
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
   const connectSocket = useCallback(() => {
     socketRef.current = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}:5002`, {
       rejectUnauthorized: false,
@@ -120,6 +127,7 @@ const ChatRoom = ({ newsId }) => {
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          onKeyPress={handleKeyPress}
           className="flex-1 p-2 border rounded-lg mr-2"
         />
         <button
