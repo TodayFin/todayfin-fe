@@ -10,7 +10,7 @@ const handleRequest = async (req, res) => {
     case "GET":
       try {
         const response = await fetch(
-          `${process.env.BACKEND_URL}/community/${postId}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/community/${postId}`,
           {
             method: "GET",
             headers: {
@@ -35,7 +35,7 @@ const handleRequest = async (req, res) => {
     case "DELETE":
       try {
         const deleteResponse = await fetch(
-          `${process.env.BACKEND_URL}/community/${postId}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/community/${postId}`,
           {
             method: "DELETE",
             headers: {
@@ -62,7 +62,7 @@ const handleRequest = async (req, res) => {
         const { title, content } = req.body;
 
         const updateResponse = await fetch(
-          `${process.env.BACKEND_URL}/community/${postId}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/community/${postId}`,
           {
             method: "PUT",
             headers: {

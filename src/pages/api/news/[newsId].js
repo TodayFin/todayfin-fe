@@ -7,7 +7,7 @@ const fetchNewsDetail = async (req, res) => {
   }
 
   try {
-    const response = await fetch(`${process.env.BACKEND_URL}/news/${newsId}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/news/${newsId}`, {
       method: "GET",
       headers: {
         Authorization: authorizationHeader,

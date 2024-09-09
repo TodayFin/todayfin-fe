@@ -7,10 +7,10 @@ const fetchNews = async (req, res) => {
     return res.status(400).json({ error: "Date is required" });
   }
 
-  let endpoint = `${process.env.BACKEND_URL}/news/date?page=${page}`;
+  let endpoint = `${process.env.NEXT_PUBLIC_BACKEND_URL}/news/date?page=${page}`;
 
   if (category) {
-    endpoint = `${process.env.BACKEND_URL}/news/date/${category}?page=${page}`;
+    endpoint = `${process.env.NEXT_PUBLIC_BACKEND_URL}/news/date/${category}?page=${page}`;
   }
 
   try {

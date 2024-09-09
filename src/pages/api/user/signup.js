@@ -24,7 +24,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(`${process.env.BACKEND_URL}/user/signup`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

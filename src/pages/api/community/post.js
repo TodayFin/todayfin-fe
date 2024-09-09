@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(`${process.env.BACKEND_URL}/community/`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/community/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

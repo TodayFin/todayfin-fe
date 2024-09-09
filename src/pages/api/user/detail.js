@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/user/detail`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/detail`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
     }
 
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/user/detail`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/detail`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,

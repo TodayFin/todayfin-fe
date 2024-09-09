@@ -1,6 +1,6 @@
 const fetchCommunityPosts = async (req, res) => {
   const { page } = req.query;
-  const apiKey = process.env.BACKEND_URL;
+  const apiKey = process.env.NEXT_PUBLIC_BACKEND_URL;
   const authorizationHeader = req.headers.authorization;
 
   if (!authorizationHeader) {
