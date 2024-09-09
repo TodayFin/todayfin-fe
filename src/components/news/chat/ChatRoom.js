@@ -10,8 +10,31 @@ const ChatRoom = ({ newsId }) => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const chatEndRef = useRef(null);
+  const [userId, setUserId] = useState(null);
 
-  const currentUserId = 1;
+  useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        const response = await fetch(`/api/user/detail`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user details");
+        }
+
+        const data = await response.json();
+        setUserId(data._id);
+      } catch (error) {
+        console.error("Error fetching user ID:", error);
+      }
+    };
+
+    fetchUserId();
+  }, []);
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -21,6 +44,8 @@ const ChatRoom = ({ newsId }) => {
   };
 
   const connectSocket = useCallback(() => {
+    if (!userId) return;
+
     socketRef.current = io(`https://back.todayfin.site`, {
       rejectUnauthorized: false,
       reconnection: true,
@@ -46,13 +71,7 @@ const ChatRoom = ({ newsId }) => {
 
     socketRef.current.on("message", (newMessage) => {
       console.log("Received new message:", newMessage);
-      const curMessage = {
-        newsId: newsId,
-        authorId: currentUserId,
-        content: newMessage,
-        createdAt: new Date(),
-      };
-      setChat((prevChat) => [...prevChat, curMessage]);
+      setChat((prevChat) => [...prevChat, newMessage]);
     });
 
     return () => {
@@ -60,18 +79,20 @@ const ChatRoom = ({ newsId }) => {
         socketRef.current.disconnect();
       }
     };
-  }, [newsId]);
+  }, [newsId, userId]);
 
   useEffect(() => {
-    const cleanup = connectSocket();
-    return cleanup;
-  }, [connectSocket]);
+    if (userId) {
+      const cleanup = connectSocket();
+      return cleanup;
+    }
+  }, [connectSocket, userId]);
 
   const handleSend = useCallback(() => {
     if (message.trim() && socketRef.current && isConnected) {
       const newMessage = {
         newsId: newsId,
-        authorId: currentUserId,
+        authorId: userId,
         content: message,
         createdAt: new Date(),
       };
@@ -82,7 +103,7 @@ const ChatRoom = ({ newsId }) => {
       console.error("Cannot send message. Socket not connected.");
       // TODO : 사용자에게 연결 문제를 알리는 UI 로직 추가
     }
-  }, [message, newsId, isConnected, currentUserId]);
+  }, [message, newsId, isConnected, userId]);
 
   const scrollToBottom = () => {
     if (chatEndRef.current) {
@@ -104,7 +125,7 @@ const ChatRoom = ({ newsId }) => {
       )}
       <div className="mb-4 max-h-96 overflow-y-auto">
         {chat.map((comment, index) =>
-          comment.authorId === currentUserId ? (
+          comment.authorId === userId ? (
             <SentMessage
               key={index}
               user={comment.user}
