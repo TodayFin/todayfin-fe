@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 
 const useAuthStore = create((set, get) => ({
   jwt: null,
