@@ -110,7 +110,7 @@ const NewsPage = () => {
             content={newsData.article_trans}
             url={newsData.url}
           />
-          {/*<ChatRoom comments={newsData.comments} />*/}
+          <ChatRoom newsId={newsId} />{" "}
         </div>
         <div className="w-full md:w-1/3">
           <RecommendedNewsSidebar recommended={recommendedNews} />
