@@ -5,6 +5,7 @@ import NewsHeader from "@/components/news/NewsHeader";
 import NewsContent from "@/components/news/NewsContent";
 import RecommendedNewsSidebar from "@/components/news/RecommendedNewsSidebar";
 import useAuthStore from "@/store/authStore";
+import ChatRoom from "@/components/news/chat/ChatRoom";
 
 const Spinner = () => (
   <div className="flex justify-center items-center h-screen">
