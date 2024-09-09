@@ -14,7 +14,7 @@ const ChatRoom = ({ newsId }) => {
   const currentUserId = 1;
 
   const connectSocket = useCallback(() => {
-    socketRef.current = io(`${process.env.BACKEND_URL}:5002`, {
+    socketRef.current = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}:5002`, {
       rejectUnauthorized: false,
       reconnection: true,
       reconnectionAttempts: 5,
