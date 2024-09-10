@@ -47,6 +47,10 @@ const StockList = () => {
     }
   }, [sortKey, sortOrder, stockData]);
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   const handleSortChange = (e) => {
     const [key, order] = e.target.value.split("-");
     setSortKey(key);
