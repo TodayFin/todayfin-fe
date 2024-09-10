@@ -11,12 +11,15 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/detail`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/detail`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -32,21 +35,24 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Internal server error" });
     }
   } else if (req.method === "PUT") {
-    const { password } = req.body;
+    const { password, newPassword } = req.body;
 
     if (!password) {
       return res.status(400).json({ error: "Password is required" });
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/detail`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ password }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/detail`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ password, newPassword }),
+        }
+      );
 
       if (!response.ok) {
         return res
