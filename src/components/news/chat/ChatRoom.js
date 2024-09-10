@@ -65,13 +65,13 @@ const ChatRoom = ({ newsId }) => {
     });
 
     socketRef.current.on("messageList", (messages) => {
-      setChat(messages);
+      setChat(messages.reverse());
       console.log("Received message list:", messages);
     });
 
     socketRef.current.on("message", (newMessage) => {
       console.log("Received new message:", newMessage);
-      setChat((prevChat) => [...prevChat, newMessage]);
+      setChat((prevChat) => [newMessage, ...prevChat]);
     });
 
     return () => {
@@ -101,19 +101,8 @@ const ChatRoom = ({ newsId }) => {
       console.log("Message sent:", newMessage);
     } else {
       console.error("Cannot send message. Socket not connected.");
-      // TODO : 사용자에게 연결 문제를 알리는 UI 로직 추가
     }
   }, [message, newsId, isConnected, userId]);
-
-  const scrollToBottom = () => {
-    if (chatEndRef.current) {
-      chatEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [chat]);
 
   return (
     <div className="bg-white p-4 shadow-md rounded-lg">
