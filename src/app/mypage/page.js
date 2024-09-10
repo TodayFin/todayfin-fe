@@ -48,22 +48,6 @@ const MyPage = () => {
     }
 
     try {
-      // 현재 비밀번호 확인
-      const loginResponse = await fetch("/api/user/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          oauthId: email,
-          password: currentPassword,
-        }),
-      });
-
-      if (!loginResponse.ok) {
-        throw new Error("현재 비밀번호가 올바르지 않습니다.");
-      }
-
       // 비밀번호 변경 API 호출
       const updatePasswordResponse = await fetch("/api/user/detail", {
         method: "PUT",
@@ -72,7 +56,8 @@ const MyPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          password: newPassword,
+          password: currentPassword,
+          newPassword: newPassword,
         }),
       });
 
