@@ -9,7 +9,7 @@ const ChatRoom = ({ newsId }) => {
   const [isConnected, setIsConnected] = useState(false);
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
-  const chatEndRef = useRef(null);
+  const chatContainerRef = useRef(null);
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
@@ -104,6 +104,12 @@ const ChatRoom = ({ newsId }) => {
     }
   }, [message, newsId, isConnected, userId]);
 
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = 0;
+    }
+  }, [chat]);
+
   return (
     <div className="bg-white p-4 shadow-md rounded-lg">
       <h2 className="text-xl font-bold mb-4">채팅방</h2>
@@ -112,7 +118,7 @@ const ChatRoom = ({ newsId }) => {
           서버와의 연결이 끊어졌습니다. 재연결 중...
         </div>
       )}
-      <div className="mb-4 max-h-96 overflow-y-auto">
+      <div ref={chatContainerRef} className="mb-4 max-h-96 overflow-y-auto">
         {chat.map((comment, index) =>
           comment.authorId === userId ? (
             <SentMessage
@@ -130,7 +136,6 @@ const ChatRoom = ({ newsId }) => {
             />
           )
         )}
-        <div ref={chatEndRef} />
       </div>
       <div className="flex">
         <input
