@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
+const Spinner = () => (
+  <div className="flex justify-center items-center h-64">
+    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+);
+
 const StockChartPopup = ({ name, data, onClose }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const chartData = {
     series: [
       {
@@ -42,12 +59,16 @@ const StockChartPopup = ({ name, data, onClose }) => {
             Close
           </button>
         </div>
-        <Chart
-          options={chartData.options}
-          series={chartData.series}
-          type="candlestick"
-          height={350}
-        />
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <Chart
+            options={chartData.options}
+            series={chartData.series}
+            type="candlestick"
+            height={350}
+          />
+        )}
       </div>
     </div>
   );
