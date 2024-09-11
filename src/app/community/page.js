@@ -40,8 +40,9 @@ const CommunityPage = () => {
 
         const newPosts = data.posts.map((post) => ({
           id: post._id,
-          userName: `User ${post.authorId}`,
-          userId: `user${post.authorId}`,
+          nickname: post.nickname,
+          createdAt: `${new Date(post.createdAt).toLocaleString()}`,
+          title: post.title,
           content: post.content,
         }));
 
@@ -87,8 +88,9 @@ const CommunityPage = () => {
               .map((post) => (
                 <Link href={`/community/${post.id}`} key={post.id}>
                   <CommunityCard
-                    userName={post.userName}
-                    userId={post.userId}
+                    title={post.title}
+                    nickname={post.nickname}
+                    date={post.createdAt}
                     content={post.content}
                   />
                 </Link>

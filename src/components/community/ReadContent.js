@@ -106,7 +106,8 @@ const ReadContent = ({
           <div>
             <p className="font-bold">{author}</p>
             <p className="text-gray-500">
-              조회 {views} | {new Date(date).toLocaleString()}
+              {/* 조회 {views} | */}
+              {new Date(date).toLocaleString()}
             </p>
           </div>
         </div>

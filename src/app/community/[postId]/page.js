@@ -43,7 +43,7 @@ const PostPage = ({ params }) => {
 
         const formattedPost = {
           title: data.title,
-          author: `User ${data.authorId}`,
+          author: data.nickname,
           views: data.views || 0,
           date: new Date(data.createdAt),
           content: data.content,
