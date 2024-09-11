@@ -19,6 +19,7 @@ const NewsPage = () => {
   const [selectedDate, setSelectedDate] = useState(formattedToday);
   const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const categoryMap = {
     전체: null,
@@ -32,6 +33,7 @@ const NewsPage = () => {
 
   useEffect(() => {
     const fetchNews = async () => {
+      setIsLoading(true);
       try {
         const formattedDate = selectedDate.replace(/\./g, "");
         const categoryQuery = selectedCategory
@@ -54,6 +56,8 @@ const NewsPage = () => {
         setTotalPages(data.page.totalPages);
       } catch (err) {
         setError(err.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -126,18 +130,26 @@ const NewsPage = () => {
       <div className="p-4 bg-white shadow-md rounded-lg">
         <SelectDay className="mt-4" onSelect={handleDateSelect} />
         {error && <p className="text-red-500">{error}</p>}
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
-          {newsData.map((news) => (
-            <NewsThumbnailTitleContent
-              key={news._id}
-              id={news._id}
-              imageSrc={news.urlToImage || "/placeholder.png"}
-              title={news.title_trans || news.title}
-              content={news.article_trans || news.article}
-            />
-          ))}
-        </div>
-        <div className="flex justify-center mt-4">{renderPagination()}</div>
+        {isLoading ? (
+          <p className="text-center py-4">로딩 중...</p>
+        ) : newsData.length === 0 ? (
+          <p className="text-center py-4">오늘의 뉴스는 오후 6시 이후 업데이트됩니다.</p>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+              {newsData.map((news) => (
+                <NewsThumbnailTitleContent
+                  key={news._id}
+                  id={news._id}
+                  imageSrc={news.urlToImage || "/placeholder.png"}
+                  title={news.title_trans || news.title}
+                  content={news.article_trans || news.article}
+                />
+              ))}
+            </div>
+            <div className="flex justify-center mt-4">{renderPagination()}</div>
+          </>
+        )}
       </div>
     </div>
   );
