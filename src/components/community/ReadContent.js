@@ -111,7 +111,9 @@ const ReadContent = ({
             </p>
           </div>
         </div>
-        <div className="text-gray-700 mb-4 break-all">{content}</div>
+        <div className="text-gray-700 mb-4 break-all whitespace-pre-wrap">
+          {content}
+        </div>
       </div>
     </div>
   );

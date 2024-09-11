@@ -55,7 +55,7 @@ const WriteContent = () => {
         </button>
       </div>
       <div className="mb-4">
-        {error && <p className="text-red-500">{error}</p>}{" "}
+        {error && <p className="text-red-500">{error}</p>}
         <input
           type="text"
           placeholder="제목을 입력하세요."
@@ -67,7 +67,7 @@ const WriteContent = () => {
           placeholder="다른 사용자에 대한 욕설, 비하 등의 내용을 게시하면 운영정책 및 관련 법률에 의해 제재될 수 있습니다."
           value={content}
           onChange={handleContentChange}
-          className="border border-gray-300 rounded-lg p-2 w-full h-64"
+          className="border border-gray-300 rounded-lg p-2 w-full h-64 whitespace-pre-wrap"
         />
       </div>
       <div className="flex justify-end">
