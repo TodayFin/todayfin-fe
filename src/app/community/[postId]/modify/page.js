@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ModifyContent from "@/components/community/ModifyContent";
 import { useRouter } from "next/navigation";
 import useAuthStore from "@/store/authStore";
