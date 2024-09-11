@@ -168,7 +168,7 @@ const SignupPage = () => {
           </div>
           <div className="mb-6">
             <label className="block text-gray-700 font-semibold mb-2">
-              관심있는 카테고리 (최대 3개)
+              관심있는 카테고리 (필수 3개 선택)
             </label>
             <div className="flex flex-wrap">
               {categories.map((category) => (
