@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import useAuthStore from "@/store/authStore";
 
 const ReadContent = ({
   _id,
@@ -12,32 +13,8 @@ const ReadContent = ({
   content,
   authorId,
 }) => {
-  const [userId, setUserId] = useState(null);
+  const userId = useAuthStore((state) => state.user?.id);
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch("/api/user/detail", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setUserId(data._id);
-        } else {
-          console.error("Failed to fetch user data");
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
 
   const handleModify = () => {
     router.push(`/community/${_id}/modify`);

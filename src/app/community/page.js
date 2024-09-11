@@ -8,22 +8,32 @@ import useAuthStore from "@/store/authStore";
 const CommunityPage = () => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const restoreAuth = useAuthStore((state) => state.restoreAuth);
 
   useEffect(() => {
-    restoreAuth();
+    const initAuth = async () => {
+      await restoreAuth();
+      setIsLoading(false);
+    };
 
-    if (!isAuthenticated) {
+    initAuth();
+  }, [restoreAuth]);
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
       alert("로그인이 필요합니다.");
       router.push("/login");
     }
-  }, [isAuthenticated, restoreAuth, router]);
+  }, [isLoading, isAuthenticated, router]);
 
   useEffect(() => {
     const fetchPosts = async () => {
+      if (isLoading || !isAuthenticated) return;
+
       try {
         const response = await fetch(`/api/community?page=${page}`, {
           method: "GET",
@@ -53,7 +63,7 @@ const CommunityPage = () => {
     };
 
     fetchPosts();
-  }, [page]);
+  }, [page, isLoading, isAuthenticated]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,6 +78,10 @@ const CommunityPage = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
 
   return (
     <div className="container mx-auto p-4">

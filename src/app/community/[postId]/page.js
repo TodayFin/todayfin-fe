@@ -16,11 +16,19 @@ const PostPage = ({ params }) => {
   const router = useRouter();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const restoreAuth = useAuthStore((state) => state.restoreAuth);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    restoreAuth();
+    const initAuth = async () => {
+      await restoreAuth();
+      setIsLoading(false);
+    };
 
-    if (!isAuthenticated) {
+    initAuth();
+  }, [restoreAuth]);
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
       alert("로그인이 필요합니다.");
       router.push("/login");
     }

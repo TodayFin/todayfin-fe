@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import io from "socket.io-client";
 import ReceivedMessage from "./ReceivedMessage";
 import SentMessage from "./SentMessage";
+import useAuthStore from "@/store/authStore";
 
 const ChatRoom = ({ newsId }) => {
   const socketRef = useRef(null);
@@ -10,32 +11,7 @@ const ChatRoom = ({ newsId }) => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const chatContainerRef = useRef(null);
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    const fetchUserId = async () => {
-      try {
-        const response = await fetch(`/api/user/detail`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch user details");
-        }
-
-        const data = await response.json();
-        setUserId(data._id);
-      } catch (error) {
-        console.error("Error fetching user ID:", error);
-      }
-    };
-
-    fetchUserId();
-  }, []);
-
+  const userId = useAuthStore((state) => state.user?.id);
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();

@@ -19,7 +19,9 @@ const useAuthStore = create((set, get) => ({
       }
 
       const data = await response.json();
-      set({ user: { email: data.oauthId, nickname: data.nickname } });
+      set({
+        user: { email: data.oauthId, nickname: data.nickname, id: data._id },
+      });
       return true;
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -28,9 +30,10 @@ const useAuthStore = create((set, get) => ({
   },
 
   // 로그인
-  login: (jwt) => {
+  login: async (jwt) => {
     set({ jwt, isAuthenticated: true });
     localStorage.setItem("jwt", jwt);
+    await get().fetchUserData();
   },
 
   // 로그아웃

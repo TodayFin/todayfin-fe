@@ -20,43 +20,26 @@ const NewsPage = () => {
 
   const [newsData, setNewsData] = useState(null);
   const [recommendedNews, setRecommendedNews] = useState([]);
-  const [userId, setUserId] = useState(null);
-
+  const userId = useAuthStore((state) => state.user?.id);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const restoreAuth = useAuthStore((state) => state.restoreAuth);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    restoreAuth();
+    const initAuth = async () => {
+      await restoreAuth();
+      setIsLoading(false);
+    };
 
-    if (!isAuthenticated) {
+    initAuth();
+  }, [restoreAuth]);
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
       alert("로그인이 필요합니다.");
       router.push("/login");
     }
-  }, [isAuthenticated, restoreAuth, router]);
-
-  useEffect(() => {
-    const fetchUserId = async () => {
-      try {
-        const response = await fetch(`/api/user/detail`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch user details");
-        }
-
-        const data = await response.json();
-        setUserId(data._id);
-      } catch (error) {
-        console.error("Error fetching user ID:", error);
-      }
-    };
-
-    fetchUserId();
-  }, []);
+  }, [isAuthenticated, router]);
 
   useEffect(() => {
     if (newsId && userId) {

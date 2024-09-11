@@ -15,7 +15,7 @@ const Header = () => {
 
   useEffect(() => {
     restoreAuth();
-  }, [restoreAuth]);
+  }, []);
 
   const handleLogout = () => {
     logout();

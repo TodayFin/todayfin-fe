@@ -1,38 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import useAuthStore from "@/store/authStore";
 
 const MyPage = () => {
-  const [email, setEmail] = useState("");
-  const [nickname, setNickname] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch("/api/user/detail", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("사용자 정보를 가져오는데 실패했습니다.");
-        }
-
-        const data = await response.json();
-        setEmail(data.oauthId);
-        setNickname(data.nickname);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
+  const user = useAuthStore((state) => state.user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,7 +63,7 @@ const MyPage = () => {
               type="email"
               id="email"
               className="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none"
-              value={email}
+              value={user?.email}
               disabled
             />
           </div>
@@ -102,7 +78,7 @@ const MyPage = () => {
               type="text"
               id="nickname"
               className="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none"
-              value={nickname}
+              value={user?.nickname}
               disabled
             />
           </div>
