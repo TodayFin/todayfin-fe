@@ -67,9 +67,9 @@ const NewsHeader = ({ title, source, publishedAt, views, content }) => {
     <div className="mb-4 relative">
       <h1 className="text-3xl font-bold mb-2">{title}</h1>
       <div className="text-gray-500 mb-2 relative">
-        <span>{source} | </span>
-        <span>{new Date(formattedPublishedAt).toLocaleString()} | </span>
-        <span>조회 0{/*views*/}</span>
+        <span>{source}</span>
+        <span> | {new Date(formattedPublishedAt).toLocaleString()}</span>
+        {/*<span> | 조회 0views</span>*/}
         <button
           className="m-1 px-3 py-2 rounded-lg border bg-gray-200 text-gray-700 ml-4"
           onClick={handleSummaryClick}

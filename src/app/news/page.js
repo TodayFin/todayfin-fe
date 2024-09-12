@@ -133,7 +133,9 @@ const NewsPage = () => {
         {isLoading ? (
           <p className="text-center py-4">로딩 중...</p>
         ) : newsData.length === 0 ? (
-          <p className="text-center py-4">오늘의 뉴스는 오후 6시 이후 업데이트됩니다.</p>
+          <p className="text-center py-4">
+            오늘의 뉴스는 오후 1시 이후 업데이트됩니다.
+          </p>
         ) : (
           <>
             <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
